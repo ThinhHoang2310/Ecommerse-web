@@ -1,12 +1,11 @@
-
-import './App.css'
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const a = x => {
+    console.log('sadasdasd');
+  };
 
-  return (
-    <div>Ecommerse</div>
-  )
+  return <div>Ecommerse</div>;
 }
 
 export default App;
