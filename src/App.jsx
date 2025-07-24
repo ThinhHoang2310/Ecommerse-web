@@ -1,11 +1,16 @@
-import './App.css';
+import HomePage from '@components/HomePage/HomePage';
+import Info from '@components/Info/Info';
 
 function App() {
-  const a = x => {
-    console.log('sadasdasd');
-  };
+  return (
+    <>
+      <HomePage />
+      <Info />
+      {/* content
 
-  return <div>Ecommerse</div>;
+    <MyFooter/> */}
+    </>
+  );
 }
 
 export default App;
