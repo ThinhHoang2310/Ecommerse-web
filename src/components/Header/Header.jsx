@@ -37,7 +37,8 @@ function MyHeader() {
             alt="logo"
             style={{
               width: '160px',
-              height: '53px',
+              height: '56px',
+              marginTop: '10px',
             }}
           />
         </div>

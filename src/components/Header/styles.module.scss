@@ -21,6 +21,10 @@
 
 .containerBoxIcon {
   @include flex_box_custom(center, center, 10px);
+
+  img {
+    cursor: pointer;
+  }
 }
 
 .containerBox {
@@ -38,6 +42,7 @@
   background-color: $primary-color;
   width: 26px;
   height: 26px;
+  cursor: pointer;
 }
 
 .menu {
