@@ -7,8 +7,8 @@ function MyFooter() {
 
    return (
       <div className={container}>
-         <div>
-            <img src={Logo} alt="" width={160} height={55} />
+         <div style={{ marginLeft: '15px' }}>
+            <img src={Logo} alt="" width={150} height={50} />
          </div>
 
          <div className={boxNav}>

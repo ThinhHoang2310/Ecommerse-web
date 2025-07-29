@@ -1,12 +1,12 @@
 import Button from '@components/Button/Button';
 import styles from './styles.module.scss';
 // import LeftImg from '@images/hinhanhweb/hinh2-2.png'
-import useTranslateX from '@components/SaleHomePage/TranslateX';
+import useTranslateXImage from '@/hooks/useTranslateXImage';
 
 function SaleHomePage() {
    const { container, title, description, boxBtn, boxImg } = styles;
 
-   const { translateXPosition } = useTranslateX();
+   const { translateXPosition } = useTranslateXImage();
 
    return (
       <div className={container}>
