@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { IoCloseOutline } from 'react-icons/io5';
 import LogIn from '@components/ContentSideBar/LogIn/LogIn';
 import Compare from '@components/ContentSideBar/Compare/Compare';
+import WishList from '@components/ContentSideBar/WishList/WishList';
+import Cart from '@components/ContentSideBar/Cart/Cart';
 
 function SideBar() {
    const { container, overlay, sideBar, sliderSideBar, boxIcon } = styles;
@@ -20,12 +22,12 @@ function SideBar() {
             return <LogIn />;
 
          case 'compare':
-            return <Compare/>;
+            return <Compare />;
 
          case 'wishlist':
-            return 'wishlist';
-            case 'cart':
-            return 'cart';
+            return <WishList />;
+         case 'cart':
+            return <Cart />;
          default:
             return <LogIn />;
       }
