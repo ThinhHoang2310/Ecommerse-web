@@ -21,7 +21,7 @@ function Cart() {
 
          <div>
             <div className={total}>
-               <p>SUBTOTAL</p>
+               <p>TOTAL</p>
                <p>200KUSD</p>
             </div>
 

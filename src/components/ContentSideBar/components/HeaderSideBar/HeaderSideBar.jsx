@@ -1,11 +1,12 @@
 import styles from './styles.module.scss';
 
-function HeaderSideBar({icon, title}) {
-   const {container} = styles;
+function HeaderSideBar({ icon, title }) {
+   const { container, touchIcon } = styles;
 
    return (
       <div className={container}>
-         {icon}
+         <div className={touchIcon}>{icon}</div>
+
          <div>{title}</div>
       </div>
    );

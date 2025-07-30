@@ -1,7 +1,7 @@
 const dataBoxIcon = [
-  { type: 'fb', href: '#' },
+  { type: 'fb', href: 'https://www.facebook.com/hthinhdinh' },
   { type: 'insta', href: '#' },
-  { type: 'ytb', href: '#' },
+  { type: 'ytb', href: 'https://www.youtube.com/' },
 ];
 
 const dataMenu = [

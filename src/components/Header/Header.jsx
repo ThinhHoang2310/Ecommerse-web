@@ -63,11 +63,11 @@ function MyHeader() {
             <div className={containerBox}>
                <div className={containerBoxIcon}>
                   {dataBoxIcon.map(item => {
-                     return <BoxIcon type={item.type} href={item.href} />;
+                     return <BoxIcon type={item.type} href={item.href}  />;
                   })}
                </div>
 
-               <div className={containerMenu}>
+               <div className={containerMenu}>  
                   {dataMenu.slice(0, 3).map(item => {
                      return <Menu content={item.content} href={item.href} />;
                   })}
@@ -99,22 +99,22 @@ function MyHeader() {
 
                <div className={containerBoxIcon}>
                   <img
-                     width={21}
-                     height={21}
+                     width={22}
+                     height={22}
                      src={realoadIcon}
                      alt="realoadIcon"
                      onClick={() => handleOpenSideBar('compare')}
                   />
                   <img
-                     width={21}
-                     height={21}
+                     width={22}
+                     height={22}
                      src={heartIcon}
                      alt="heartIcon"
                      onClick={() => handleOpenSideBar('wishlist')}
                   />
                   <img
-                     width={21}
-                     height={21}
+                     width={22}
+                     height={22}
                      src={cartIcon}
                      alt="cartIcon"
                      onClick={() => handleOpenSideBar('cart')}

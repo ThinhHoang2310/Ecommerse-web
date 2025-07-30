@@ -3,10 +3,9 @@
 
 .container {
    @include flex_box_custom(space-between, center, 10px);
-    flex-direction: column;
+   flex-direction: column;
 
-    div {
-        font-size: 20px;
-    }
-
+   div {
+      font-size: 20px;
+   }
 }
