@@ -10,6 +10,7 @@ import useScrollHandling from '@/hooks/useScrollHandling';
 import { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 import { SideBarContext } from '@/contexts/SideBarProvider';
+import { StoreContext } from '@/contexts/storeProvider';
 
 import { TfiReload } from 'react-icons/tfi';
 // import { FaRegHeart } from "react-icons/fa";
@@ -31,7 +32,10 @@ function MyHeader() {
    const { scrollPosition } = useScrollHandling();
    const [fixedPosition, setFixedPosition] = useState(false);
 
-   const { setIsOpen, setType } = useContext(SideBarContext);
+   const { setIsOpen, setType, userId,  listProductCart } = useContext(SideBarContext);
+
+
+   const { userInfo } = useContext(StoreContext);
 
    const handleOpenSideBar = (type) => {
       setIsOpen(true);

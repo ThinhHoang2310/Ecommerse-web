@@ -18,7 +18,7 @@ function SideBar() {
 
    const handleRenderContent = () => {
       switch (type) {
-         case 'logIn':
+         case 'login':
             return <LogIn />;
 
          case 'compare':

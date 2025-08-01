@@ -68,6 +68,15 @@
    padding-top: 7px;
    font-size: 16px;
    color: $primary-color;
+   position: relative;
+
+   .subMenu {
+      position: absolute;
+      background-color: #fff;
+      width: 100%;
+      padding: 10px;
+      top: 40px;
+   }
 
    &::after {
       content: '';

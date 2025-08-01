@@ -1,12 +1,15 @@
 import InputComon from '@components/InputComon/InputComon';
 import styles from './styles.module.scss';
 import Button from '@components/Button/Button';
-import { useContext, useState } from 'react';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useContext, useState } from 'react';
+
 import { ToastContext } from '@/contexts/ToastProvider';
-import { register } from '@/apis/authService';
+import { register, signIn, getInfo } from '@/apis/authService';
+import Cookies from 'js-cookie';
+import { SideBarContext } from '@/contexts/SideBarProvider';
+import { StoreContext } from '@/contexts/storeProvider';
 
 function LogIn() {
    const { container, title, boxRememberMe, lostPw } = styles;
@@ -15,6 +18,8 @@ function LogIn() {
    const [isLoading, setIsLoading] = useState(false);
 
    const { toast } = useContext(ToastContext);
+   const { setIsOpen } = useContext(SideBarContext);
+   const { setUserId } = useContext(StoreContext);
 
    const formik = useFormik({
       initialValues: {
@@ -36,21 +41,39 @@ function LogIn() {
       onSubmit: async values => {
          if (isLoading) return;
 
+         const { email: username, password } = values;
+
+         setIsLoading(true);
+
          if (isRegister) {
-            const { email: username, password } = values;
-
-            setIsLoading(true);
-
             await register({ username, password })
                .then(res => {
-                  console.log(res);
                   toast.success(res.data.message);
                   setIsLoading(false);
                })
                .catch(err => {
-                  console.log(err);
                   toast.error(err.response.data.message);
                   setIsLoading(false);
+               });
+         }
+
+         if (!isRegister) {
+            await signIn({ username, password })
+               .then(res => {
+                  setIsLoading(false);
+                  const { id, token, refreshToken } = res.data;
+                  setUserId(id);
+                  Cookies.set('token', token);
+                  Cookies.set('refreshToken', refreshToken);
+                  Cookies.set('userId', id);
+
+                  toast.success('Sign in successfully');
+                  setIsOpen(false);
+                  // handleGetListProductsCart(id, 'cart');
+               })
+               .catch(err => {
+                  setIsLoading(false);
+                  toast.error('Sign in failed');
                });
          }
       },
@@ -100,9 +123,10 @@ function LogIn() {
             )}
 
             <Button
-               content={isLoading ? 'Đợi chút thằng lon' : isRegister ? 'REGISTER' : 'SIGN IN'}
+               content={
+                  isLoading ? 'LOADING...' : isRegister ? 'REGISTER' : 'SIGN IN'
+               }
                type="submit"
-               // onClick={() => toast.success('Sign in successfully')}
             />
          </form>
 
@@ -112,7 +136,6 @@ function LogIn() {
                   ? 'Already have an account'
                   : "Don't have an account ?"
             }
-            type="submit"
             isPrimary={false}
             style={{ marginTop: '10px' }}
             onClick={handleToggleRegister}
