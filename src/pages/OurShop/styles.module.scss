@@ -19,6 +19,10 @@
 
       .btnBack {
          cursor: pointer;
+
+         &:hover {
+            color: $primary_color;
+         }
       }
    }
 }
@@ -60,4 +64,39 @@
          text-align: center;
       }
    }
+}
+
+.containerFilter {
+   @include flex_box_custom(space-between, center, 0px);
+   margin-top: 16px;
+
+   .boxLeft {
+      @include flex_box_custom(space-between, center, 20px);
+   }
+
+   .boxIcon {
+      @include flex_box_custom(center, center, 10px);
+   }
+
+   .selectBox {
+      border: 1px solid #e1e1e1;
+      padding: 5px;
+      border-radius: 3px;
+      color: $secondary_color;
+   }
+
+   .selectBox.sort {
+      width: 180px;
+   }
+
+   .selectBox.show {
+      width: 85px;
+   }
+}
+
+.containerProduct {
+   @include flex_box_custom(space-between, flex-start, 10px);
+
+   flex-wrap: wrap;
+   margin-top: 30px;
 }

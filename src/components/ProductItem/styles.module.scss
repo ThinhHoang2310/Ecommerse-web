@@ -59,13 +59,76 @@
    }
 }
 
-   .title {
-      font-size: 16px;
-      color: $fourth_color;
-      margin: 8px 0;
+.title {
+   font-size: 16px;
+   color: $fourth_color;
+   margin: 8px 0;
+}
+
+.priceBox {
+   font-size: 14px;
+   color: $third_color;
+}
+
+.boxSize {
+   @include flex_box_custom(center, center, 10px);
+   margin-top: 10px;
+
+   .size {
+      @include flex_box_custom(center, center, 0px);
+
+      border: 1px solid #e1e1e1;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover {
+         border: 1px solid $primary_color;
+         transition: border 0.3s;
+      }
+   }
+}
+
+.isActiveSize {
+   border: 1px solid $primary_color !important;
+}
+
+.btnClear {
+   font-size: 14px;
+   text-align: center;
+   cursor: pointer;
+   margin-top: 10px;
+
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
+.textCenter {
+   text-align: center;
+}
+
+.boxBtn {
+   width: 145px;
+   margin: 10px auto;
+}
+
+.containerItem {
+   @include flex_box_custom(flex-start, center, 15px);
+   margin-top: 10px;
+
+   .content {
+      @include flex_box_custom(flex-start, flex-start, 20px);
+
+      flex-direction: column;
    }
 
-   .priceBox {
-      font-size: 14px;
-      color: $third_color;
+   .leftBtn {
+      margin: 0px;
    }
+}
+
+.largeImg {
+   width: 420px;
+}

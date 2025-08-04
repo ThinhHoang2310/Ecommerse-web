@@ -44,7 +44,7 @@ function SaleHomePage() {
             <img
                // src="https://xstore.b-cdn.net/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/Image_2.jpeg"
                // src="https://fa-ecom.s3.eu-west-2.amazonaws.com/2025-mens-dept-content/split-banner/fa_wk25_mens_festival_digital_department-page-banner.webp"
-               src="https://rg.com.vn/QrodS"
+               src="https://fa-ecom.s3.eu-west-2.amazonaws.com/2025-womens-dept-content/split-banner/fa_wk28_q3-summer_2_ecom_refresh_womens_department-page-banner_2.webp"
                alt=""
             />
          </div>

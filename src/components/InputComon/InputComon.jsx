@@ -26,6 +26,7 @@ function InputComon({ label, type, isRequired = false, ...props }) {
       <div className={container}>
          <div className={labelInput}>
             {label} {isRequired && <span>*</span>}
+            {isPassword && <span> (at least 6 characters)</span>}
          </div>
          <div className={boxInput}>
             <input
