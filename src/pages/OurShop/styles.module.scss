@@ -100,3 +100,19 @@
    flex-wrap: wrap;
    margin-top: 30px;
 }
+
+.sectionListProduct {
+   min-height: 800px;
+}
+
+.rotate {
+   animation: loading 1s infinite linear;
+   @keyframes loading {
+      0% {
+         transform: rotate(0deg);
+      }
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+}

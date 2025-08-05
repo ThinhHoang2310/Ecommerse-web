@@ -16,8 +16,8 @@
 .FixedHeader {
    position: fixed;
    top: -75px;
-   background-color:#ffffffeb;
-   box-shadow:2px 8px 12px 0px rgba(0, 0, 0, 0.15);
+   background-color: #ffffffeb;
+   box-shadow: 2px 8px 12px 0px rgba(0, 0, 0, 0.15);
    backdrop-filter: blur(4px);
    z-index: 999;
 
@@ -36,13 +36,10 @@
 
 .containerBoxIcon {
    @include flex_box_custom(center, center, 14px);
-   
+
    &:hover {
       cursor: pointer;
-
    }
-
-   
 }
 
 .containerBox {
@@ -94,5 +91,24 @@
    &:hover::after {
       opacity: 1;
       transform: scale(1);
+   }
+}
+
+.boxCart {
+   position: relative;
+
+   .quantity {
+      @include flex_box_custom(center, center, 0px);
+      @include radius_common(50%);
+
+      position: absolute;
+      top: -9px;
+      right: -8px;
+      width: 15px;
+      height: 15px;
+      font-size: 12px;
+      background-color: $primary-color;
+      color: #fff;
+      outline: 1px solid #fff;
    }
 }

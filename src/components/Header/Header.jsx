@@ -27,17 +27,19 @@ function MyHeader() {
       containerBox,
       FixedHeader,
       topHeader,
+      boxCart,
+      quantity,
    } = styles;
 
    const { scrollPosition } = useScrollHandling();
    const [fixedPosition, setFixedPosition] = useState(false);
 
-   const { setIsOpen, setType, userId,  listProductCart } = useContext(SideBarContext);
-
+   const { setIsOpen, setType, userId, listProductCart } =
+      useContext(SideBarContext);
 
    const { userInfo } = useContext(StoreContext);
 
-   const handleOpenSideBar = (type) => {
+   const handleOpenSideBar = type => {
       setIsOpen(true);
       setType(type);
    };
@@ -67,11 +69,11 @@ function MyHeader() {
             <div className={containerBox}>
                <div className={containerBoxIcon}>
                   {dataBoxIcon.map(item => {
-                     return <BoxIcon type={item.type} href={item.href}  />;
+                     return <BoxIcon type={item.type} href={item.href} />;
                   })}
                </div>
 
-               <div className={containerMenu}>  
+               <div className={containerMenu}>
                   {dataMenu.slice(0, 3).map(item => {
                      return <Menu content={item.content} href={item.href} />;
                   })}
@@ -116,13 +118,16 @@ function MyHeader() {
                      alt="heartIcon"
                      onClick={() => handleOpenSideBar('wishlist')}
                   />
-                  <img
-                     width={22}
-                     height={22}
-                     src={cartIcon}
-                     alt="cartIcon"
-                     onClick={() => handleOpenSideBar('cart')}
-                  />
+                  <div className={boxCart}>
+                     <img
+                        width={22}
+                        height={22}
+                        src={cartIcon}
+                        alt="cartIcon"
+                        onClick={() => handleOpenSideBar('cart')}
+                     />
+                     <div className={quantity}>{listProductCart.length}</div>
+                  </div>
 
                   {/* <TfiReload style={{ fontSize: '20px' }} onClick={() => handleOpenSideBar('compare')}  />
                   <FaRegHeart style={{ fontSize: '24px' }}  onClick={() => handleOpenSideBar('wishlist')}/>
