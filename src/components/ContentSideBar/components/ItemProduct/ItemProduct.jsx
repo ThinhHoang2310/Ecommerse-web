@@ -1,5 +1,9 @@
+import { deleteItem } from '@/apis/cartService';
 import styles from './styles.module.scss';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useContext, useState } from 'react';
+import { SideBarContext } from '@/contexts/SideBarProvider';
+import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
 
 function ItemProduct({
    src,
@@ -8,14 +12,43 @@ function ItemProduct({
    skuProduct,
    sizeProduct,
    quantity,
+   productId,
+   userId,
 }) {
-   const { container, boxContent, boxClose, title, size, price } = styles;
+   const {
+      container,
+      boxContent,
+      boxClose,
+      title,
+      size,
+      price,
+      overlayLoading,
+   } = styles;
+
+   const [isDelete, setIsDelete] = useState(false);
+
+   const { handleGetListProductCart } = useContext(SideBarContext);
+
+   const handleRemoveItem = () => {
+      setIsDelete(true);
+      deleteItem({
+         productId,
+         userId,
+      })
+         .then(res => {
+            setIsDelete(false);
+            handleGetListProductCart(userId, 'cart');
+         })
+         .catch(err => {
+            setIsDelete(false);
+         });
+   };
 
    return (
       <div className={container}>
          <img src={src} alt="" />
 
-         <div className={boxClose}>
+         <div className={boxClose} onClick={handleRemoveItem}>
             <IoCloseOutline />
          </div>
 
@@ -23,10 +56,16 @@ function ItemProduct({
             <div className={title}>{nameProduct} </div>
             <div className={size}>Size {sizeProduct}</div>
             <div className={price}>
-               {quantity} x {priceProduct}
+               {quantity} x ${priceProduct}
             </div>
-            <div className={price}>{skuProduct}</div>
+            <div className={price}>SKU:{skuProduct}</div>
          </div>
+
+         {isDelete && (
+            <div className={overlayLoading}>
+               <LoadingTextCommon />
+            </div>
+         )}
       </div>
    );
 }
