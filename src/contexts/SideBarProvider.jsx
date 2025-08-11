@@ -13,6 +13,8 @@ export const SideBarProvider = ({ children }) => {
 
    const [isLoading, setIsLoading] = useState(false);
 
+   const [detailProduct, setDetailProduct] = useState(null);
+
    const userId = Cookies.get('userId');
 
    const handleGetListProductCart = (userId, type) => {
@@ -40,6 +42,8 @@ export const SideBarProvider = ({ children }) => {
       isLoading,
       setIsLoading,
       userId,
+      detailProduct,
+      setDetailProduct,
    };
 
    useEffect(() => {

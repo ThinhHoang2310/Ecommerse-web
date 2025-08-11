@@ -4,6 +4,7 @@ import realoadIcon from '@icons/svgs/reloadicon.svg';
 import heartIcon from '@icons/svgs/hearticon.svg';
 import cartIcon from '@icons/svgs/carticon.svg';
 import BoxIcon from '@components/Header/Boxicon/Boxicon';
+import { FaEye } from 'react-icons/fa';
 
 import cls from 'classnames';
 import Button from '@components/Button/Button';
@@ -32,7 +33,7 @@ function ProductItem({
 
    const userId = Cookies.get('userId');
 
-   const { setIsOpen, setType, handleGetListProductCart } =
+   const { setIsOpen, setType, handleGetListProductCart, setDetailProduct } =
       useContext(SideBarContext);
 
    const { toast } = useContext(ToastContext);
@@ -102,6 +103,12 @@ function ProductItem({
          });
    };
 
+   const handleShowDetailProductSideBar = () => {
+      setIsOpen(true);
+      setType('detail');
+      setDetailProduct(details);
+   };
+
    useEffect(() => {
       if (isHomePage) {
          setIsShowGrid(true);
@@ -126,8 +133,11 @@ function ProductItem({
                <div className={boxIcon}>
                   <img src={realoadIcon} alt="" />
                </div>
-               <div className={boxIcon}>
-                  <img src={cartIcon} alt="" />
+               <div
+                  className={boxIcon}
+                  onClick={handleShowDetailProductSideBar}
+               >
+                  <FaEye style={{ fontSize: '18px' }} />
                </div>
             </div>
          </div>
