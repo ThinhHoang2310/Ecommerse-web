@@ -3,7 +3,7 @@ import MainLayout from '@components/Layout/Layout';
 import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Banner from '@pages/OurShop/components/Banner';
-import { OurShopProvider, OurShopContext } from '@contexts/ourShopProvider';
+import { OurShopProvider, OurShopContext } from '@contexts/OurShopProvider';
 import { useContext } from 'react';
 import Filter from '@pages/OurShop/components/Filter';
 import ListProducts from '@pages/OurShop/components/ListProducts';
@@ -35,10 +35,10 @@ function OurShop() {
             <Banner />
             <div>
                <Filter />
-               <ListProducts/>
+               <ListProducts />
             </div>
          </MainLayout>
-         <MyFooter/>
+         <MyFooter />
       </OurShopProvider>
    );
 }
