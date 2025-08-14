@@ -20,7 +20,11 @@ function DetailProduct() {
          <div className={label}>Size</div>
          <div className={boxSize}>
             {detailProduct.size.map((item, index) => {
-               return <div className={size }  key={index}>{item.name}</div>;
+               return (
+                  <div className={size} key={index}>
+                     {item.name}
+                  </div>
+               );
             })}
          </div>
       </div>

@@ -17,6 +17,7 @@ import { TfiReload } from 'react-icons/tfi';
 import { FaRegHeart } from 'react-icons/fa6';
 import { CiShoppingCart } from 'react-icons/ci';
 import { FiShoppingCart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 function MyHeader() {
    const {
@@ -79,7 +80,8 @@ function MyHeader() {
                   })}
                </div>
             </div>
-            <div>
+            <div style={{ cursor: 'pointer' }}>
+               <Link to="/" />
                <img
                   src={Logo}
                   alt="logo"
