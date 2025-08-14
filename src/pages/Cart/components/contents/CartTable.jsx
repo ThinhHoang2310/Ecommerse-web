@@ -3,11 +3,10 @@ import styles from '../../styles.module.scss';
 import SelectBox from '@/pages/OurShop/components/SelectBox';
 import { data } from 'react-router-dom';
 import LoadingCart from '@/pages/Cart/components/Loading';
-import { BsTrash3 } from "react-icons/bs";
-
+import { BsTrash3 } from 'react-icons/bs';
 
 const CartTable = ({ listProductCart, getData, isLoading, getDataDelete }) => {
-   const { cartTable } = styles;
+   const { cartTable,trashIcon } = styles;
 
    const handleQuantityChange = (id, newQuantity) => {
       // Xử lý thay đổi số lượng sản phẩm với id tương ứng
@@ -22,6 +21,9 @@ const CartTable = ({ listProductCart, getData, isLoading, getDataDelete }) => {
       { label: '5', value: '5' },
       { label: '6', value: '6' },
       { label: '7', value: '7' },
+      { label: '8', value: '8' },
+      { label: '9', value: '9' },
+      { label: '10', value: '10' },
    ];
 
    const getValueSelect = (userId, productId, quantity, size) => {
@@ -63,7 +65,9 @@ const CartTable = ({ listProductCart, getData, isLoading, getDataDelete }) => {
                            style={{ cursor: 'pointer' }}
                         >
                            {/* &#128465; */}
-                           <BsTrash3 />
+                           <div className={trashIcon}>
+                              <BsTrash3 />
+                           </div>
                         </div>
                      </td>
                      <td>${item.price.toFixed(2)}</td>

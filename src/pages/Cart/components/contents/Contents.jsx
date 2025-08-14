@@ -92,9 +92,8 @@ function Contents() {
                      <div className={boxBtnDelete}>
                         <Button
                            content={
-                              <div>
-                                 {' '}
-                                 <BsTrash3 />
+                              <div style={{ display: 'flex', gap: '5px', alignItems: 'center', justifyContent: 'center' }}>
+                                 <BsTrash3 size={16} />
                                  CLEAR SHOPPING CART
                               </div>
                            }

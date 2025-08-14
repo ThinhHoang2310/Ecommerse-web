@@ -158,6 +158,15 @@
             }
          }
       }
+
+      .trashIcon {
+         cursor: pointer;
+         font-size: 16px;
+      }
+
+      .trashIcon:hover {
+         color: $primary_color;
+      }
    }
 
    .containerRight {

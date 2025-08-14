@@ -1,3 +1,46 @@
+@import '@styles/variable.module.scss';
+@import '@styles/mixin.module.scss';
+
 .container {
-    padding: 20px;
+   padding: 20px;
+
+   .title {
+      font-size: 22px;
+      color: $fourth_color;
+      margin-top: 16px;
+   }
+
+   .price {
+      font-size: 20px;
+      color: $secondary_color;
+      margin-top: 10px;
+   }
+
+   .des {
+      color: $third_color;
+      margin-top: 10px;
+   }
+
+   .label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: $third_color;
+   }
+
+   .boxSize {
+    @include flex_box_custom(flex-start, center, 10px);
+    margin-top: 10px;
+
+    .size {
+        padding: 9px 12px;
+        border:1px solid #e1e1e1;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .isActive {
+        border: 1px solid $primary_color;
+    }
+
+   }
 }
