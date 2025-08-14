@@ -81,16 +81,17 @@ function MyHeader() {
                </div>
             </div>
             <div style={{ cursor: 'pointer' }}>
-               <Link to="/" />
-               <img
-                  src={Logo}
-                  alt="logo"
-                  style={{
-                     width: '160px',
-                     height: '56px',
-                     marginTop: '10px',
-                  }}
-               />
+               <Link to="/">
+                  <img
+                     src={Logo}
+                     alt="logo"
+                     style={{
+                        width: '160px',
+                        height: '56px',
+                        marginTop: '10px',
+                     }}
+                  />
+               </Link>
             </div>
             <div className={containerBox}>
                <div className={containerMenu}>
