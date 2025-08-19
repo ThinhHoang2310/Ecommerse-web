@@ -78,20 +78,20 @@
       @include flex_box_custom(center, center, 10px);
    }
 
-   .selectBox {
-      border: 1px solid #e1e1e1;
-      padding: 5px;
-      border-radius: 3px;
-      color: $secondary_color;
-   }
-
    .selectBox.sort {
       width: 180px;
    }
+}
 
-   .selectBox.show {
-      width: 85px;
-   }
+.selectBox {
+   border: 1px solid #e1e1e1;
+   padding: 5px;
+   border-radius: 3px;
+   color: $secondary_color;
+}
+
+.selectBox.show {
+   width: 85px;
 }
 
 .containerProduct {

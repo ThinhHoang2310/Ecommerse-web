@@ -19,7 +19,8 @@ function SaleHomePage() {
          >
             <img
                // src="https://xstore.b-cdn.net/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/Image_1.jpeg"
-               src="https://rg.com.vn/oC64R"
+               // src="https://rg.com.vn/oC64R"
+               src="https://fa-ecom.s3.eu-west-2.amazonaws.com/2025-mens-dept-content/split-banner/fa_wk33_t-shirts_shorts_department-page-banner.webp"
                alt=""
             />
          </div>

@@ -5,6 +5,7 @@ import { SideBarProvider } from '@/contexts/SideBarProvider';
 import SideBar from '@components/SideBar/SideBar';
 import { ToastProvider } from '@/contexts/ToastProvider';
 import { StoreProvider } from '@/contexts/storeProvider';
+import Chatbot from '@components/Chatbot/Chatbot';
 
 function App() {
    return (
@@ -26,6 +27,13 @@ function App() {
                         })}
                      </Routes>
                   </Suspense>
+
+                         {/* Thêm chatbot luôn hiển thị */}
+                  {/* <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 999 }}>
+                     <Chatbot />
+                  </div> */}
+
+
                </BrowserRouter>
             </SideBarProvider>
          </ToastProvider>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <!-- Nền tròn trắng -->
+  <circle cx="150" cy="150" r="150" fill="white"/>
+
+  <!-- Chữ WILL_T căn giữa -->
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial, sans-serif" font-size="70" fill="#000000" font-weight="bold">
+    WILL_T
+  </text>
+</svg>

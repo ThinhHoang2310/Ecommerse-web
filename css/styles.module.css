@@ -1,15 +1,14 @@
-.container {
-  padding: 30px 20px 0 20px;
+.rotate {
+  animation: loading 1s infinite linear;
 }
-.container .title {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-.container .boxRememberMe {
-  margin-bottom: 30px;
-}
-.container .boxRememberMe input {
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=styles.module.css.map */erMe input {
   margin-right: 5px;
 }
 .container .boxRememberMe span {
@@ -22,5 +21,85 @@
 }
 .container .lostPw:hover {
   text-decoration: underline;
+  cursor: pointer;
+}/*# sourceMappingURL=styles.module.css.map */px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateX(100%); /* ẩn hoàn toàn sang phải */
+  transition: all 0.3s ease;
+}
+.chatbotBox.open {
+  opacity: 1;
+  transform: translateX(0); /* trượt vào vị trí */
+  pointer-events: auto;
+}
+
+.chatbotHeader {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chatbotHeader button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.chatbotMessages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  scroll-behavior: smooth;
+}
+.chatbotMessages .chatbotMessage {
+  margin-bottom: 5px;
+}
+.chatbotMessages .chatbotMessage.user {
+  text-align: right;
+}
+.chatbotMessages .chatbotMessage.user span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: #dcf8c6;
+}
+.chatbotMessages .chatbotMessage.bot {
+  text-align: left;
+}
+.chatbotMessages .chatbotMessage.bot span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: #f1f0f0;
+}
+
+.chatbotInput {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+.chatbotInput input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+.chatbotInput button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
   cursor: pointer;
 }/*# sourceMappingURL=styles.module.css.map */
