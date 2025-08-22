@@ -3,10 +3,10 @@
 
 .container {
    padding: 20px;
-//     overflow-y: auto;     // Cho phép cuộn dọc
-//   overflow-x: hidden;   // Ẩn tràn ngang
-//     box-sizing: border-box;
-//     height: 100%;
+   //     overflow-y: auto;     // Cho phép cuộn dọc
+   //   overflow-x: hidden;   // Ẩn tràn ngang
+   //     box-sizing: border-box;
+   //     height: 100%;
 
    .title {
       font-size: 22px;
@@ -40,6 +40,11 @@
          border: 1px solid #e1e1e1;
          font-size: 12px;
          cursor: pointer;
+
+         &:hover {
+            border: 1px solid $primary_color;
+            transition: border 0.3s;
+         }
       }
 
       .isActive {

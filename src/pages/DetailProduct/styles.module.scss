@@ -1,0 +1,119 @@
+@import '@styles/mixin.module.scss';
+@import '@styles/variable.module.scss';
+
+.container {
+   padding-top: 80px;
+
+   .navigateSection {
+      @include flex_box_custom(space-between, center, 0px);
+
+      color: $secondary-color;
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 10px 0;
+   }
+
+   .contentSection {
+      @include flex_box_custom(unset, flex-start, 0px);
+
+      .imageBox {
+         max-width: 610px;
+         width: 100%;
+
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+
+         img {
+            width: calc(100% / 2 - 10px);
+            height: 300px;
+            object-fit: cover;
+            border-radius: 3px;
+            cursor: zoom-in;
+         }
+      }
+
+      .infoBox {
+         flex-grow: 1;
+
+         h1 {
+            font-size: 2rem;
+            margin-top: 0px;
+            font-weight: 400;
+            color: $fourth-color;
+         }
+
+         .price {
+            font-size: 1.5rem;
+            color: $secondary-color;
+         }
+
+         .description {
+            color: $third-color;
+            font-size: 1.5rem;
+            font-weight: 400;
+         }
+
+         .titleSize {
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            font-size: 1.6rem;
+            color: $third-color;
+         }
+
+         .boxSize {
+            @include flex_box_custom(flex-start, center, 10px);
+
+            .size {
+               border: 1px solid #e1e1e1;
+               padding: 5px 10px;
+               border-radius: 3px;
+               cursor: pointer;
+               font-size: 1.2rem;
+               color: $third-color;
+            }
+         }
+
+         .functionInfo {
+            @include flex_box_custom(space-between, center, 2rem);
+
+            margin-top: 2rem;
+
+            .boxBtn {
+               flex-grow: 1;
+            }
+
+            .increasementAmount {
+               @include flex_box_custom(center, center, 0px);
+
+               div {
+                  border: 1px solid #e1e1e1;
+                  padding: 8px 5px;
+                  color: $secondary-color;
+                  cursor: pointer;
+               }
+               div:nth-child(2) {
+                  padding: 8px 10px;
+                  color: $third-color;
+                  cursor: unset;
+               }
+            }
+         }
+
+         .orSection {
+            @include flex_box_custom(center, center, 0px);
+            margin: 20px 0;
+
+            div {
+               width: 100%;
+               height: 1px;
+               background-color: #e1e1e1;
+            }
+
+            span {
+               padding: 0 10px;
+            }
+         }
+      }
+   }
+}

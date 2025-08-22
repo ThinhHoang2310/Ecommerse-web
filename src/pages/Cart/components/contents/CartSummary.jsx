@@ -23,7 +23,7 @@ const CartSummary = () => {
       textSecure,
    } = styles;
 
-   const {listProductCart , isLoading} = useContext(SideBarContext);
+   const { listProductCart, isLoading } = useContext(SideBarContext);
 
    const srcMethods = [
       'https://xstore.8theme.com/elementor2/marseille04/wp-content/themes/xstore/images/woocommerce/payment-icons/visa.jpeg',
@@ -44,12 +44,12 @@ const CartSummary = () => {
 
             <div className={cls(boxTotal, subTotal)}>
                <div>Subtotal</div>
-               <div className={price}>${total}</div>
+               <div className={price}>${total.toFixed(2)}</div>
             </div>
 
             <div className={cls(boxTotal, totals)}>
                <div>TOTAL</div>
-               <div>${total}</div>
+               <div>${total.toFixed(2)}</div>
             </div>
 
             <Button content={'PROCEED TO CHECKOUT'} />
@@ -57,7 +57,6 @@ const CartSummary = () => {
             <Button content={'CONTINUE SHOPPING'} isPrimary={false} />
 
             {isLoading && <LoadingCart />}
-
          </div>
 
          <div className={containerMethods}>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { SideBarContext } from '@/contexts/SideBarProvider';
 import styles from './styles.module.scss';
 import SliderComon from '@components/SliderComon/SliderComon';
@@ -8,6 +8,9 @@ import Button from '@components/Button/Button';
 import cartIcon from '@icons/svgs/carticon.svg';
 import realoadIcon from '@icons/svgs/reloadicon.svg';
 import heartIcon from '@icons/svgs/hearticon.svg';
+
+import cls from 'classnames';
+import { addProductToCart } from '@/apis/cartService';
 
 function DetailProduct() {
    const {
@@ -25,9 +28,21 @@ function DetailProduct() {
       or,
       boxAddOther,
       boxFooter,
+      isActive,
    } = styles;
 
-   const { detailProduct } = useContext(SideBarContext);
+   const {
+      detailProduct,
+      userId,
+      setType,
+      handleGetListProductCart,
+      setIsLoading,
+      setIsOpen,
+   } = useContext(SideBarContext);
+
+   const [chooseSize, setChooseSize] = useState('');
+
+   const [quantity, setQuantity] = useState('1');
 
    const showOptions = [
       { label: '1', value: '1' },
@@ -42,6 +57,40 @@ function DetailProduct() {
       { label: '10', value: '10' },
    ];
 
+   const handleGetSize = value => {
+      setChooseSize(value);
+   };
+
+   const handleClearSize = () => {
+      setChooseSize('');
+   };
+
+   const handleGetQuantity = value => {
+      setQuantity(value);
+   };
+
+   const handleAddToCart = () => {
+      const data = {
+         userId,
+         productId: detailProduct._id,
+         quantity,
+         size: chooseSize,
+         isMultiple: true,
+      };
+
+      setIsOpen(false);
+      setIsLoading(true);
+      addProductToCart(data)
+         .then(res => {
+            setIsOpen(true);
+            setType('cart');
+            handleGetListProductCart(userId, 'cart');
+         })
+         .catch(err => {
+            console.log(err);
+         });
+   };
+
    return (
       <div className={container}>
          <SliderComon data={detailProduct.images} />
@@ -50,24 +99,51 @@ function DetailProduct() {
          <div className={price}>${detailProduct.price}</div>
          <div className={des}>{detailProduct.description}</div>
 
-         <div className={label}>Size</div>
+         <div className={label}>Size {chooseSize}</div>
          <div className={boxSize}>
             {detailProduct.size.map((item, index) => {
                return (
-                  <div className={size} key={index}>
+                  <div
+                     className={cls(size, {
+                        [isActive]: item.name === chooseSize,
+                     })}
+                     key={index}
+                     onClick={() => handleGetSize(item.name)}
+                  >
                      {item.name}
                   </div>
                );
             })}
          </div>
 
+         {chooseSize && (
+            <div
+               style={{
+                  fontSize: '12px',
+                  marginTop: '10px',
+                  cursor: 'pointer',
+               }}
+               onClick={handleClearSize}
+            >
+               Clear
+            </div>
+         )}
+
          <div className={boxAddToCart}>
-            <SelectBox options={showOptions} type="show" />
+            <SelectBox
+               options={showOptions}
+               type="show"
+               defaultValue={quantity}
+               getValue={handleGetQuantity}
+            />
 
             <div>
                <Button
                   content={
-                     <div className={boxIconAddToCart}>
+                     <div
+                        className={boxIconAddToCart}
+                        onClick={handleAddToCart}
+                     >
                         <img
                            width={18}
                            height={18}
@@ -112,7 +188,7 @@ function DetailProduct() {
             <img width={22} height={22} src={heartIcon} alt="heartIcon" />
             <div>Add to wishlist</div>
          </div>
-{/* 
+         {/* 
          <div>
             SKU: <span>9999</span>
          </div>
@@ -120,7 +196,7 @@ function DetailProduct() {
          <div className={boxFooter}>
             Caterogy <span>9999</span>
          </div>
-   
+
          <div className={boxFooter}>
             Estimate delivery <span>2 - 4 days</span>
          </div>
