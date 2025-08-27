@@ -129,9 +129,11 @@ function ProductItem({
       <div
          className={isShowGrid ? '' : containerItem}
          style={{ cursor: 'pointer' }}
-         onClick={handleNavigateToDetail}
       >
-         <div className={cls(boxImg, { [largeImg]: !isShowGrid })}>
+         <div
+            className={cls(boxImg, { [largeImg]: !isShowGrid })}
+            onClick={handleNavigateToDetail}
+         >
             <img src={src} alt="" />
             <img src={prevSrc} alt="" className={showImgWhenHover} />
 

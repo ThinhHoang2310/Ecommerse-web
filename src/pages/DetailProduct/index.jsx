@@ -3,6 +3,13 @@ import MainLayout from '@components/Layout/Layout';
 import styles from './styles.module.scss';
 import Button from '@components/Button/Button';
 
+import heartIcon from '@icons/svgs/hearticon.svg';
+import realoadIcon from '@icons/svgs/reloadicon.svg';
+import cartIcon from '@icons/svgs/carticon.svg';
+import PaymentMethods from '@components/PaymentMethods/PaymentMethods';
+import AccordionMenu from '@components/AccordionMenu';
+import { useState } from 'react';
+
 function DetailProduct() {
    const {
       container,
@@ -19,7 +26,28 @@ function DetailProduct() {
       boxBtn,
       increasementAmount,
       orSection,
+      addFunction,
+      info,
    } = styles;
+
+   const [menuSelected, setMenuSelected] = useState(1);
+
+   const dataAccordionMenu = [
+      {
+         id: 1,
+         titleMenu: 'ADDITIONAL INFORMATION',
+         content: <div>AAA</div>,
+      },
+      {
+         id: 2,
+         titleMenu: 'REVIEW (0)',
+         content: <div>review content</div>,
+      },
+   ];
+
+   const handleSetMenuSelected = id => {
+      setMenuSelected(id);
+   };
 
    return (
       <div>
@@ -82,6 +110,46 @@ function DetailProduct() {
                         <span>OR</span>
                         <div></div>
                      </div>
+
+                     <div>
+                        <Button content={'BUY NOW'} />
+                     </div>
+
+                     <div className={addFunction}>
+                        <div>
+                           <img src={heartIcon} alt="" />
+                        </div>
+                        <div>
+                           <img src={realoadIcon} alt="" />
+                        </div>
+                     </div>
+
+                     <div>
+                        <PaymentMethods />
+                     </div>
+                     <div className={info}>
+                        <div>
+                           Brand: <span>Brand 01</span>
+                        </div>
+                        <div>
+                           SKU: <span> 01</span>
+                        </div>
+                        <div>
+                           Category: <span>Men</span>
+                        </div>
+                     </div>
+
+                     {dataAccordionMenu.map((item, index) => (
+                        <AccordionMenu
+                           titleMenu={item.titleMenu}
+                           contentJsx={item.content}
+                           key={index}
+                           onClick={() => {
+                              handleSetMenuSelected(item.id);
+                           }}
+                           isSelected={menuSelected === item.id}
+                        />
+                     ))}
                   </div>
                </div>
             </MainLayout>
