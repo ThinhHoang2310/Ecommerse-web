@@ -9,6 +9,8 @@ import cartIcon from '@icons/svgs/carticon.svg';
 import PaymentMethods from '@components/PaymentMethods/PaymentMethods';
 import AccordionMenu from '@components/AccordionMenu';
 import { useState } from 'react';
+import ReviewProduct from '@/pages/DetailProduct/components/Review';
+import InformationProduct from '@/pages/DetailProduct/components/Information';
 
 function DetailProduct() {
    const {
@@ -36,12 +38,12 @@ function DetailProduct() {
       {
          id: 1,
          titleMenu: 'ADDITIONAL INFORMATION',
-         content: <div>AAA</div>,
+         content: <InformationProduct />,
       },
       {
          id: 2,
          titleMenu: 'REVIEW (0)',
-         content: <div>review content</div>,
+         content: <ReviewProduct />,
       },
    ];
 

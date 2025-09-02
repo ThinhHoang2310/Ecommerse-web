@@ -153,3 +153,31 @@
       }
    }
 }
+
+.containerInfo {
+   font-weight: 300;
+
+   div:last-child {
+      border-bottom: unset;
+   }
+   .itemInfo {
+      @include flex_box_custom(flex-start, center, 0px);
+
+      border-bottom: 1px solid #e1e1e1;
+      padding: 15px 8px;
+
+      div {
+         width: 50%;
+      }
+
+      .title {
+         font-size: 1.6rem;
+         color: $secondary-color;
+      }
+
+      .content {
+         color: $third-color;
+         font-size: 1.6rem;
+      }
+   }
+}
