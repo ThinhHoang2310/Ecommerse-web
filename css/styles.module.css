@@ -1,15 +1,14 @@
-.container {
-  padding: 30px 20px 0 20px;
+.rotate {
+  animation: loading 1s infinite linear;
 }
-.container .title {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-.container .boxRememberMe {
-  margin-bottom: 30px;
-}
-.container .boxRememberMe input {
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=styles.module.css.map */erMe input {
   margin-right: 5px;
 }
 .container .boxRememberMe span {

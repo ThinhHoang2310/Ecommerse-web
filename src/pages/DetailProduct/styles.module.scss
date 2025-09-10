@@ -181,3 +181,90 @@
       }
    }
 }
+
+.containerReview {
+   .reviews {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e1e1e1;
+   }
+
+   .noreview {
+      font-size: 1.4rem;
+      color: $third-color;
+      margin-bottom: 20px;
+   }
+
+   .replyForm {
+      padding-top: 30px;
+
+      .commentReplyTitle {
+         font-size: 1.4rem;
+         margin-bottom: 14px;
+         padding-bottom: 14px;
+         border-bottom: 1px solid #e1e1e1;
+         color: $third-color;
+      }
+
+      .commentNotes {
+         font-size: 1.4rem;
+         color: $third-color;
+         margin-bottom: 20px;
+      }
+
+      form {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+
+         .commentFormCookiesConsent {
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+
+            input {
+               margin-top: 2px;
+            }
+
+            span {
+               color: $third-color;
+            }
+         }
+
+         .btnSubmit {
+            width: 100%;
+            max-width: 110px;
+         }
+      }
+   }
+}
+
+.formItem {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+
+   .boxItemStar {
+      display: flex;
+      gap: 25px;
+   }
+
+   label {
+      font-size: 1.6rem;
+      color: $third-color;
+
+      span {
+         color: #c62828;
+      }
+   }
+
+   input,
+   textarea {
+      border: 1px solid #e1e1e1;
+      padding: 8px 15px;
+      outline: none;
+
+      &:focus {
+         border: 1px solid $secondary-color;
+      }
+   }
+}
