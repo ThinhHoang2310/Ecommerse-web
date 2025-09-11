@@ -262,6 +262,7 @@
       border: 1px solid #e1e1e1;
       padding: 8px 15px;
       outline: none;
+      resize: vertical;
 
       &:focus {
          border: 1px solid $secondary-color;
