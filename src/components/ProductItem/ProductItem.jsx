@@ -135,21 +135,41 @@ function ProductItem({
       >
          <div
             className={cls(boxImg, { [largeImg]: !isShowGrid })}
-            onClick={handleNavigateToDetail}
+            // onClick={handleNavigateToDetail}
          >
-            <img src={src} alt="" />
-            <img src={prevSrc} alt="" className={showImgWhenHover} />
+            <img src={src} alt="" onClick={handleNavigateToDetail} />
+            <img
+               src={prevSrc}
+               alt=""
+               className={showImgWhenHover}
+               onClick={handleNavigateToDetail}
+            />
 
             <div className={showFncWhenHover}>
-               <div className={boxIcon}>
+               <div className={boxIcon} onClick={handleAddToCart}>
                   <img src={cartIcon} alt="" />
                </div>
-               <div className={boxIcon}>
+
+               <div
+                  className={boxIcon}
+                  onClick={() => {
+                     setIsOpen(true);
+                     setType('wishlist');
+                  }}
+               >
                   <img src={heartIcon} alt="" />
                </div>
-               <div className={boxIcon}>
+
+               <div
+                  className={boxIcon}
+                  onClick={() => {
+                     setIsOpen(true);
+                     setType('compare');
+                  }}
+               >
                   <img src={realoadIcon} alt="" />
                </div>
+
                <div
                   className={boxIcon}
                   onClick={handleShowDetailProductSideBar}

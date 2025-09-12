@@ -2,34 +2,55 @@
 @import '@styles/mixin.module.scss';
 
 .container {
-  @include flex_box_custom(space-between, center, 0px);
+   @include flex_box_custom(space-between, center, 0px);
 
-  // height: 144px;
-  background-color: $primary-color;
-  margin-top: -75px;
-  padding: 20px 50px;
+   // height: 144px;
+   background-color: $primary-color;
+   margin-top: -75px;
+   padding: 20px 50px;
 }
 
 .containerCard {
-  @include flex_box_custom(center, center, 18px);
+   @include flex_box_custom(center, center, 10px);
 
-  width: 280px;
-  height: 104px;
+   width: 280px;
+   height: 104px;
+   //  margin-right: 8px;
+
+   @media (max-width: 1024px) {
+      width: 45%;
+   }
+
+   @media (max-width: 768px) {
+      width: 100%;
+      max-width: 320px;
+   }
+}
+
+.icon {
+   width: clamp(1.4rem, 4vw, 5rem);
+   height: auto; // giữ tỉ lệ
+
+   @media (max-width: 768px) {
+      width: 32px;
+   }
 }
 
 .containerContent {
-  @include flex_box_custom(center, flex-start, 12px);
+   @include flex_box_custom(center, flex-start, 12px);
 
-  flex-direction: column;
-  color: $white-color;
-  font-weight: 300;
+   flex-direction: column;
+   color: $white-color;
+   font-weight: 300;
 
-  .title {
-    font-size: 17px;
-  }
+   .title {
+      // font-size: 17px;
+      font-size: clamp(1rem, 1.5vw, 1.7rem);
+   }
 
-  .desctitle {
-    font-size: 16px;
-    color: #ffffffc7;
-  }
+   .desctitle {
+      // font-size: 16px;
+      font-size: clamp(0.8rem, 1.3vw, 1.6rem);
+      color: #ffffffc7;
+   }
 }

@@ -2,34 +2,37 @@
 @import '@styles/variable.module.scss';
 
 .container {
-  @include flex_box_custom(center, center, 0px);
+   @include flex_box_custom(center, center, 0px);
 
-  // background-image: url(../../assets/images/Banner.png);
-  background-image: url(../../assets/images/Banner2.png);
+   // background-image: url(../../assets/images/Banner.png);
+   background-image: url(../../assets/images/Banner2.png);
 
-  // min-height: 750px;
-  min-height: 600px;
+   min-height: 600px;
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
 }
 
 .content {
-  @include flex_box_custom(center, center, 10px);
+   @include flex_box_custom(center, center, 10px);
 
-  flex-direction: column;
+   flex-direction: column;
 }
 
 .title {
-  font-size: 42px;
-  font-weight: 400;
-  color: $fourth_color;
-  margin: 15px;
+   // font-size: 42px;
+   //  font-size: 4.2rem;
+   font-size: clamp(2rem, 5vw, 4.2rem);
+   font-weight: 400;
+   color: $fourth_color;
+   margin: 15px;
 }
 
 .description {
-  font-weight: 400;
-  color: $third_color;
-  margin-bottom: 25px;
+   //  font-size: 1.8rem;
+   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+   font-weight: 400;
+   color: $third_color;
+   margin-bottom: 25px;
 }
