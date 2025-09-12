@@ -11,6 +11,8 @@ import AccordionMenu from '@components/AccordionMenu';
 import { useState } from 'react';
 import ReviewProduct from '@/pages/DetailProduct/components/Review';
 import InformationProduct from '@/pages/DetailProduct/components/Information';
+import MyFooter from '@components/Footer/Footer';
+import SliderComon from '@components/SliderComon/SliderComon';
 
 function DetailProduct() {
    const {
@@ -50,6 +52,45 @@ function DetailProduct() {
    const handleSetMenuSelected = id => {
       setMenuSelected(id);
    };
+
+   const temptDataSlider = [
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+      {
+         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+         name: 'Product 01',
+         price: '$123',
+         size: [{ name: 'L' }, { name: 'S' }],
+      },
+   ];
 
    return (
       <div>
@@ -154,8 +195,21 @@ function DetailProduct() {
                      ))}
                   </div>
                </div>
+
+               <div>
+                  <h2>RELATED PRODUCTS</h2>
+
+                  <SliderComon
+                     data={temptDataSlider}
+                     isProductItem
+                     showItem={4}
+                     showDots={false}
+                  />
+               </div>
             </MainLayout>
          </div>
+
+         <MyFooter />
       </div>
    );
 }

@@ -8,7 +8,7 @@ import { FaEye } from 'react-icons/fa';
 
 import cls from 'classnames';
 import Button from '@components/Button/Button';
-import { useContext, useEffect, useState } from 'react';
+import { use, useContext, useEffect, useState } from 'react';
 import { OurShopContext } from '@/contexts/OurShopProvider';
 import Cookies from 'js-cookie';
 import { SideBarContext } from '@/contexts/SideBarProvider';
@@ -24,9 +24,8 @@ function ProductItem({
    price,
    details,
    isHomePage = true,
+   slideItem = false,
 }) {
-   // const { isShowGrid } = useContext(OurShopContext);
-
    const [sizeChoose, setSizeChoose] = useState('');
 
    const ourShopStore = useContext(OurShopContext);
@@ -124,6 +123,10 @@ function ProductItem({
          setIsShowGrid(ourShopStore?.isShowGrid);
       }
    }, [isHomePage, ourShopStore?.isShowGrid]);
+
+   useEffect(() => {
+      if (slideItem) setIsShowGrid(true);
+   }, [slideItem]);
 
    return (
       <div

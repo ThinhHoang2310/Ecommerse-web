@@ -268,4 +268,8 @@
          border: 1px solid $secondary-color;
       }
    }
+
+   textarea:first-of-type {
+      min-height: 50px;
+   }
 }
