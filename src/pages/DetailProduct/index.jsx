@@ -8,15 +8,16 @@ import realoadIcon from '@icons/svgs/reloadicon.svg';
 import cartIcon from '@icons/svgs/carticon.svg';
 import PaymentMethods from '@components/PaymentMethods/PaymentMethods';
 import AccordionMenu from '@components/AccordionMenu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewProduct from '@/pages/DetailProduct/components/Review';
 import InformationProduct from '@/pages/DetailProduct/components/Information';
 import MyFooter from '@components/Footer/Footer';
 import SliderComon from '@components/SliderComon/SliderComon';
 
 import ReactImageMagnifier from 'simple-image-magnifier/react';
-import { data } from 'react-router-dom';
+import { data, useParams } from 'react-router-dom';
 import cls from 'classnames';
+import { getDetailProduct } from '@/apis/productsService';
 
 const tempDataSize = [
    {
@@ -60,6 +61,12 @@ function DetailProduct() {
    const [sizeSelected, setSizeSelected] = useState('');
 
    const [quantity, setQuantity] = useState(1);
+
+   const [data, setData] = useState();
+
+   const [isLoading, setIsLoading] = useState(false);
+
+   const param = useParams();
 
    const dataAccordionMenu = [
       {
@@ -151,9 +158,30 @@ function DetailProduct() {
       );
    };
 
+   const fetchDataDetail = async id => {
+      setIsLoading(true);
+      try {
+         const data = await getDetailProduct(id);
+         setData(data);
+         setIsLoading(false);
+      } catch (error) {
+         console.log(error);
+         setIsLoading(false);
+      }
+   };
+
+   useEffect(() => {
+      if (param.id) {
+         fetchDataDetail(param.id);
+      }
+   }, [param]);
+
+   console.log(data);
+
    return (
       <div>
          <MyHeader />
+
          <div className={container}>
             <MainLayout>
                <div className={navigateSection}>
