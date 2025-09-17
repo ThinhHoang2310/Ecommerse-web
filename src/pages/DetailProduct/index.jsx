@@ -14,6 +14,21 @@ import InformationProduct from '@/pages/DetailProduct/components/Information';
 import MyFooter from '@components/Footer/Footer';
 import SliderComon from '@components/SliderComon/SliderComon';
 
+import ReactImageMagnifier from 'simple-image-magnifier/react';
+import { data } from 'react-router-dom';
+import cls from 'classnames';
+
+const tempDataSize = [
+   {
+      name: 'M',
+      amount: '1000',
+   },
+   {
+      name: 'L',
+      amount: '1000',
+   },
+];
+
 function DetailProduct() {
    const {
       container,
@@ -32,9 +47,19 @@ function DetailProduct() {
       orSection,
       addFunction,
       info,
+      active,
+      clear,
+      activeDisabledBtn,
    } = styles;
 
+   const INCREASEMENT = 'increasement';
+   const DECREASEMENT = 'decreasement';
+
    const [menuSelected, setMenuSelected] = useState(1);
+
+   const [sizeSelected, setSizeSelected] = useState('');
+
+   const [quantity, setQuantity] = useState(1);
 
    const dataAccordionMenu = [
       {
@@ -48,6 +73,24 @@ function DetailProduct() {
          content: <ReviewProduct />,
       },
    ];
+
+   const dataImageDetail = [
+      'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+      'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+      'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+      'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
+   ];
+
+   const handleRenderZoomImage = src => {
+      return (
+         <ReactImageMagnifier
+            srcPreview={src}
+            srcOriginal={src}
+            width={295}
+            height={300}
+         />
+      );
+   };
 
    const handleSetMenuSelected = id => {
       setMenuSelected(id);
@@ -92,6 +135,22 @@ function DetailProduct() {
       },
    ];
 
+   const handleSelectedSize = size => {
+      setSizeSelected(size);
+   };
+
+   const handleClearSizeSelected = () => {
+      setSizeSelected('');
+   };
+
+   const handleSetQuantity = type => {
+      if (quantity < 1) return;
+
+      setQuantity(prev =>
+         type === INCREASEMENT ? (prev += 1) : quantity === 1 ? 1 : (prev -= 1)
+      );
+   };
+
    return (
       <div>
          <MyHeader />
@@ -106,58 +165,68 @@ function DetailProduct() {
 
                <div className={contentSection}>
                   <div className={imageBox}>
-                     <img
-                        src="https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg"
-                        alt=""
-                     />
-                     <img
-                        src="https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg"
-                        alt=""
-                     />
-                     <img
-                        src="https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg"
-                        alt=""
-                     />
-                     <img
-                        src="https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg"
-                        alt=""
-                     />
+                     {dataImageDetail.map(src => handleRenderZoomImage(src))}
                   </div>
 
                   <div className={infoBox}>
                      <h1>Title Product</h1>
                      <p className={price}>$123</p>
                      <p className={description}>This is a great product.</p>
-
-                     <p className={titleSize}>Size</p>
+                     <p className={titleSize}>Size : {sizeSelected}</p>
                      <div className={boxSize}>
-                        <div className={size}>S</div>
-                        <div className={size}>M</div>
-                        <div className={size}>L</div>
+                        {tempDataSize.map((ItemSize, index) => {
+                           return (
+                              <div
+                                 className={cls(size, {
+                                    [active]: sizeSelected === ItemSize.name,
+                                 })}
+                                 key={index}
+                                 onClick={() =>
+                                    handleSelectedSize(ItemSize.name)
+                                 }
+                              >
+                                 {ItemSize.name}
+                              </div>
+                           );
+                        })}
                      </div>
+                     {sizeSelected && (
+                        <p className={clear} onClick={handleClearSizeSelected}>
+                           Clear
+                        </p>
+                     )}
 
                      <div className={functionInfo}>
                         <div className={increasementAmount}>
-                           <div>-</div>
-                           <div>1</div>
-                           <div>+</div>
+                           <div onClick={() => handleSetQuantity(DECREASEMENT)}>
+                              -
+                           </div>
+                           <div>{quantity}</div>
+                           <div onClick={() => handleSetQuantity(INCREASEMENT)}>
+                              +
+                           </div>
                         </div>
 
                         <div className={boxBtn}>
-                           <Button content={'ADD TO CART'} />
+                           <Button
+                              content={'ADD TO CART'}
+                              customClassName={
+                                 !sizeSelected && activeDisabledBtn
+                              }
+                           />
                         </div>
                      </div>
-
                      <div className={orSection}>
                         <div></div>
                         <span>OR</span>
                         <div></div>
                      </div>
-
                      <div>
-                        <Button content={'BUY NOW'} />
+                        <Button
+                           content={'BUY NOW'}
+                           customClassName={!sizeSelected && activeDisabledBtn}
+                        />
                      </div>
-
                      <div className={addFunction}>
                         <div>
                            <img src={heartIcon} alt="" />
@@ -166,7 +235,6 @@ function DetailProduct() {
                            <img src={realoadIcon} alt="" />
                         </div>
                      </div>
-
                      <div>
                         <PaymentMethods />
                      </div>
@@ -181,7 +249,6 @@ function DetailProduct() {
                            Category: <span>Men</span>
                         </div>
                      </div>
-
                      {dataAccordionMenu.map((item, index) => (
                         <AccordionMenu
                            titleMenu={item.titleMenu}

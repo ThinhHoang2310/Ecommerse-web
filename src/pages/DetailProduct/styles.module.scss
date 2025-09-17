@@ -73,6 +73,10 @@
                font-size: 1.2rem;
                color: $third-color;
             }
+
+            .active {
+               border: 1px solid #555;
+            }
          }
 
          .functionInfo {
@@ -92,6 +96,7 @@
                   padding: 8px 5px;
                   color: $secondary-color;
                   cursor: pointer;
+                  user-select: none;
                }
                div:nth-child(2) {
                   padding: 8px 10px;
@@ -271,5 +276,20 @@
 
    textarea:first-of-type {
       min-height: 50px;
+   }
+}
+
+.clear {
+   text-decoration: underline;
+   cursor: pointer;
+}
+
+.activeDisabledBtn {
+   opacity: 0.5;
+   cursor: not-allowed;
+
+   &:hover {
+      background-color: #333 !important;
+      color: #fff;
    }
 }
