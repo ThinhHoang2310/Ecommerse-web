@@ -17,18 +17,8 @@ import SliderComon from '@components/SliderComon/SliderComon';
 import ReactImageMagnifier from 'simple-image-magnifier/react';
 import { data, useParams } from 'react-router-dom';
 import cls from 'classnames';
-import { getDetailProduct } from '@/apis/productsService';
-
-const tempDataSize = [
-   {
-      name: 'M',
-      amount: '1000',
-   },
-   {
-      name: 'L',
-      amount: '1000',
-   },
-];
+import { getDetailProduct, getRelatedProduct } from '@/apis/productsService';
+import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
 
 function DetailProduct() {
    const {
@@ -51,6 +41,7 @@ function DetailProduct() {
       active,
       clear,
       activeDisabledBtn,
+      loading,
    } = styles;
 
    const INCREASEMENT = 'increasement';
@@ -65,6 +56,8 @@ function DetailProduct() {
    const [data, setData] = useState();
 
    const [isLoading, setIsLoading] = useState(false);
+
+   const [relatedData, setRelatedData] = useState([]);
 
    const param = useParams();
 
@@ -170,13 +163,24 @@ function DetailProduct() {
       }
    };
 
+   const fetchDataRelatedProduct = async id => {
+      setIsLoading(true);
+      try {
+         const data = await getRelatedProduct(id);
+         setRelatedData(data);
+         setIsLoading(false);
+      } catch (error) {
+         console.log(error);
+         setIsLoading(false);
+      }
+   };
+
    useEffect(() => {
       if (param.id) {
          fetchDataDetail(param.id);
+         fetchDataRelatedProduct(param.id);
       }
    }, [param]);
-
-   console.log(data);
 
    return (
       <div>
@@ -191,111 +195,126 @@ function DetailProduct() {
                   </div>
                </div>
 
-               <div className={contentSection}>
-                  <div className={imageBox}>
-                     {dataImageDetail.map(src => handleRenderZoomImage(src))}
+               {isLoading ? (
+                  <div className={loading}>
+                     <LoadingTextCommon />
                   </div>
-
-                  <div className={infoBox}>
-                     <h1>Title Product</h1>
-                     <p className={price}>$123</p>
-                     <p className={description}>This is a great product.</p>
-                     <p className={titleSize}>Size : {sizeSelected}</p>
-                     <div className={boxSize}>
-                        {tempDataSize.map((ItemSize, index) => {
-                           return (
-                              <div
-                                 className={cls(size, {
-                                    [active]: sizeSelected === ItemSize.name,
-                                 })}
-                                 key={index}
-                                 onClick={() =>
-                                    handleSelectedSize(ItemSize.name)
-                                 }
-                              >
-                                 {ItemSize.name}
-                              </div>
-                           );
-                        })}
+               ) : (
+                  <div className={contentSection}>
+                     <div className={imageBox}>
+                        {data?.images.map(src => handleRenderZoomImage(src))}
                      </div>
-                     {sizeSelected && (
-                        <p className={clear} onClick={handleClearSizeSelected}>
-                           Clear
-                        </p>
-                     )}
 
-                     <div className={functionInfo}>
-                        <div className={increasementAmount}>
-                           <div onClick={() => handleSetQuantity(DECREASEMENT)}>
-                              -
+                     <div className={infoBox}>
+                        <h1>{data?.name}</h1>
+                        <p className={price}>${data?.price}</p>
+                        <p className={description}>{data?.description}</p>
+                        <p className={titleSize}>Size : {sizeSelected}</p>
+                        <div className={boxSize}>
+                           {data?.size.map((ItemSize, index) => {
+                              return (
+                                 <div
+                                    className={cls(size, {
+                                       [active]: sizeSelected === ItemSize.name,
+                                    })}
+                                    key={index}
+                                    onClick={() =>
+                                       handleSelectedSize(ItemSize.name)
+                                    }
+                                 >
+                                    {ItemSize.name}
+                                 </div>
+                              );
+                           })}
+                        </div>
+                        {sizeSelected && (
+                           <p
+                              className={clear}
+                              onClick={handleClearSizeSelected}
+                           >
+                              Clear
+                           </p>
+                        )}
+
+                        <div className={functionInfo}>
+                           <div className={increasementAmount}>
+                              <div
+                                 onClick={() => handleSetQuantity(DECREASEMENT)}
+                              >
+                                 -
+                              </div>
+                              <div>{quantity}</div>
+                              <div
+                                 onClick={() => handleSetQuantity(INCREASEMENT)}
+                              >
+                                 +
+                              </div>
                            </div>
-                           <div>{quantity}</div>
-                           <div onClick={() => handleSetQuantity(INCREASEMENT)}>
-                              +
+
+                           <div className={boxBtn}>
+                              <Button
+                                 content={'ADD TO CART'}
+                                 customClassName={
+                                    !sizeSelected && activeDisabledBtn
+                                 }
+                              />
                            </div>
                         </div>
-
-                        <div className={boxBtn}>
+                        <div className={orSection}>
+                           <div></div>
+                           <span>OR</span>
+                           <div></div>
+                        </div>
+                        <div>
                            <Button
-                              content={'ADD TO CART'}
+                              content={'BUY NOW'}
                               customClassName={
                                  !sizeSelected && activeDisabledBtn
                               }
                            />
                         </div>
-                     </div>
-                     <div className={orSection}>
-                        <div></div>
-                        <span>OR</span>
-                        <div></div>
-                     </div>
-                     <div>
-                        <Button
-                           content={'BUY NOW'}
-                           customClassName={!sizeSelected && activeDisabledBtn}
-                        />
-                     </div>
-                     <div className={addFunction}>
-                        <div>
-                           <img src={heartIcon} alt="" />
+                        <div className={addFunction}>
+                           <div>
+                              <img src={heartIcon} alt="" />
+                           </div>
+                           <div>
+                              <img src={realoadIcon} alt="" />
+                           </div>
                         </div>
                         <div>
-                           <img src={realoadIcon} alt="" />
+                           <PaymentMethods />
                         </div>
+                        <div className={info}>
+                           <div>
+                              Brand: <span>Brand 01</span>
+                           </div>
+                           <div>
+                              SKU: <span> 01</span>
+                           </div>
+                           <div>
+                              Category: <span>Men</span>
+                           </div>
+                        </div>
+                        {dataAccordionMenu.map((item, index) => (
+                           <AccordionMenu
+                              titleMenu={item.titleMenu}
+                              contentJsx={item.content}
+                              key={index}
+                              onClick={() => {
+                                 handleSetMenuSelected(item.id);
+                              }}
+                              isSelected={menuSelected === item.id}
+                           />
+                        ))}
                      </div>
-                     <div>
-                        <PaymentMethods />
-                     </div>
-                     <div className={info}>
-                        <div>
-                           Brand: <span>Brand 01</span>
-                        </div>
-                        <div>
-                           SKU: <span> 01</span>
-                        </div>
-                        <div>
-                           Category: <span>Men</span>
-                        </div>
-                     </div>
-                     {dataAccordionMenu.map((item, index) => (
-                        <AccordionMenu
-                           titleMenu={item.titleMenu}
-                           contentJsx={item.content}
-                           key={index}
-                           onClick={() => {
-                              handleSetMenuSelected(item.id);
-                           }}
-                           isSelected={menuSelected === item.id}
-                        />
-                     ))}
                   </div>
-               </div>
+               )}
 
                <div>
                   <h2>RELATED PRODUCTS</h2>
 
                   <SliderComon
-                     data={temptDataSlider}
+                     data={relatedData}
                      isProductItem
                      showItem={4}
                      showDots={false}
