@@ -16,6 +16,7 @@ import { ToastContext } from '@/contexts/ToastProvider';
 import { addProductToCart } from '@/apis/cartService';
 import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
 import { useNavigate } from 'react-router-dom';
+import { handleAddProductToCartCommon } from '@/ultis/helper';
 
 function ProductItem({
    src,
@@ -70,39 +71,17 @@ function ProductItem({
    };
 
    const handleAddToCart = () => {
-      if (!userId) {
-         setIsOpen(true);
-         setType('login');
-         toast.warning('Please login to add product to cart');
-
-         return;
-      }
-
-      if (!sizeChoose) {
-         toast.warning('Please choose size');
-         return;
-      }
-
-      const data = {
+      handleAddProductToCartCommon(
          userId,
-         productId: details._id,
-         quantity: 1,
-         size: sizeChoose,
-      };
-
-      setIsLoading(true);
-      addProductToCart(data)
-         .then(res => {
-            setIsOpen(true);
-            setType('cart');
-            toast.success('Add product to cart successfully!');
-            setIsLoading(false);
-            handleGetListProductCart(userId, 'cart');
-         })
-         .catch(err => {
-            toast.error('Add product to cart failed!');
-            setIsLoading(false);
-         });
+         setIsOpen,
+         setType,
+         toast,
+         sizeChoose,
+         details._id,
+         1,
+         setIsLoading,
+         handleGetListProductCart
+      );
    };
 
    const handleShowDetailProductSideBar = () => {

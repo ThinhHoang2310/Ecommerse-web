@@ -8,17 +8,22 @@ import realoadIcon from '@icons/svgs/reloadicon.svg';
 import cartIcon from '@icons/svgs/carticon.svg';
 import PaymentMethods from '@components/PaymentMethods/PaymentMethods';
 import AccordionMenu from '@components/AccordionMenu';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReviewProduct from '@/pages/DetailProduct/components/Review';
 import InformationProduct from '@/pages/DetailProduct/components/Information';
 import MyFooter from '@components/Footer/Footer';
 import SliderComon from '@components/SliderComon/SliderComon';
 
 import ReactImageMagnifier from 'simple-image-magnifier/react';
-import { data, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import cls from 'classnames';
 import { getDetailProduct, getRelatedProduct } from '@/apis/productsService';
 import LoadingTextCommon from '@components/LoadingTextCommon/LoadingTextCommon';
+import { toast } from 'react-toastify';
+import { handleAddProductToCartCommon } from '@/ultis/helper';
+import { SideBarContext } from '@/contexts/SideBarProvider';
+import { ToastContext } from '@/contexts/ToastProvider';
+import Cookies from 'js-cookie';
 
 function DetailProduct() {
    const {
@@ -42,6 +47,7 @@ function DetailProduct() {
       clear,
       activeDisabledBtn,
       loading,
+      emtyData,
    } = styles;
 
    const INCREASEMENT = 'increasement';
@@ -60,6 +66,17 @@ function DetailProduct() {
    const [relatedData, setRelatedData] = useState([]);
 
    const param = useParams();
+
+   const navigate = useNavigate();
+
+   const { setIsOpen, setType, handleGetListProductCart } =
+      useContext(SideBarContext);
+
+   const { toast } = useContext(ToastContext);
+
+   const userId = Cookies.get('userId');
+
+   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
 
    const dataAccordionMenu = [
       {
@@ -96,45 +113,6 @@ function DetailProduct() {
       setMenuSelected(id);
    };
 
-   const temptDataSlider = [
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-      {
-         image: 'https://www.gorillawear.com/resize/90824800-crowley-oversized-mens-hoodie-washed-gray-11_5038763837848.jpg/0/1100/True/crowley-heren-oversized-hoodie-verwassen-grijs-l.jpg?_gl=1*5ih2qn*_up*MQ..*_ga*NTM3OTAzNDguMTc1NTg2MDI2OQ..*_ga_S0Q1DCMDE0*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxMzkyNDA0ODMy*_ga_KS4NJ6WEVP*czE3NTU4NjAyNjckbzEkZzAkdDE3NTU4NjAyNjckajYwJGwwJGgxNzA2ODM0NTM2.jpeg',
-         name: 'Product 01',
-         price: '$123',
-         size: [{ name: 'L' }, { name: 'S' }],
-      },
-   ];
-
    const handleSelectedSize = size => {
       setSizeSelected(size);
    };
@@ -158,7 +136,7 @@ function DetailProduct() {
          setData(data);
          setIsLoading(false);
       } catch (error) {
-         console.log(error);
+         toast.error('Get detail product failed');
          setIsLoading(false);
       }
    };
@@ -170,9 +148,24 @@ function DetailProduct() {
          setRelatedData(data);
          setIsLoading(false);
       } catch (error) {
-         console.log(error);
+         toast.error('Get detail product failed');
+         setRelatedData([]);
          setIsLoading(false);
       }
+   };
+
+   const handleAdd = () => {
+      handleAddProductToCartCommon(
+         userId,
+         setIsOpen,
+         setType,
+         toast,
+         sizeSelected,
+         param.id,
+         quantity,
+         setIsLoadingBtn,
+         handleGetListProductCart
+      );
    };
 
    useEffect(() => {
@@ -200,126 +193,158 @@ function DetailProduct() {
                      <LoadingTextCommon />
                   </div>
                ) : (
-                  <div className={contentSection}>
-                     <div className={imageBox}>
-                        {data?.images.map(src => handleRenderZoomImage(src))}
-                     </div>
-
-                     <div className={infoBox}>
-                        <h1>{data?.name}</h1>
-                        <p className={price}>${data?.price}</p>
-                        <p className={description}>{data?.description}</p>
-                        <p className={titleSize}>Size : {sizeSelected}</p>
-                        <div className={boxSize}>
-                           {data?.size.map((ItemSize, index) => {
-                              return (
-                                 <div
-                                    className={cls(size, {
-                                       [active]: sizeSelected === ItemSize.name,
-                                    })}
-                                    key={index}
-                                    onClick={() =>
-                                       handleSelectedSize(ItemSize.name)
-                                    }
-                                 >
-                                    {ItemSize.name}
-                                 </div>
-                              );
-                           })}
-                        </div>
-                        {sizeSelected && (
-                           <p
-                              className={clear}
-                              onClick={handleClearSizeSelected}
-                           >
-                              Clear
-                           </p>
-                        )}
-
-                        <div className={functionInfo}>
-                           <div className={increasementAmount}>
-                              <div
-                                 onClick={() => handleSetQuantity(DECREASEMENT)}
-                              >
-                                 -
-                              </div>
-                              <div>{quantity}</div>
-                              <div
-                                 onClick={() => handleSetQuantity(INCREASEMENT)}
-                              >
-                                 +
-                              </div>
-                           </div>
-
-                           <div className={boxBtn}>
+                  <>
+                     {!data ? (
+                        <div className={emtyData}>
+                           <p>NO RESULT</p>
+                           <div>
                               <Button
-                                 content={'ADD TO CART'}
-                                 customClassName={
-                                    !sizeSelected && activeDisabledBtn
-                                 }
+                                 content={'Back to Our Shop'}
+                                 onClick={() => navigate('/shop')}
                               />
                            </div>
                         </div>
-                        <div className={orSection}>
-                           <div></div>
-                           <span>OR</span>
-                           <div></div>
-                        </div>
-                        <div>
-                           <Button
-                              content={'BUY NOW'}
-                              customClassName={
-                                 !sizeSelected && activeDisabledBtn
-                              }
-                           />
-                        </div>
-                        <div className={addFunction}>
-                           <div>
-                              <img src={heartIcon} alt="" />
+                     ) : (
+                        <div className={contentSection}>
+                           <div className={imageBox}>
+                              {data?.images.map(src =>
+                                 handleRenderZoomImage(src)
+                              )}
                            </div>
-                           <div>
-                              <img src={realoadIcon} alt="" />
+
+                           <div className={infoBox}>
+                              <h1>{data?.name}</h1>
+                              <p className={price}>${data?.price}</p>
+                              <p className={description}>{data?.description}</p>
+                              <p className={titleSize}>Size : {sizeSelected}</p>
+                              <div className={boxSize}>
+                                 {data?.size.map((ItemSize, index) => {
+                                    return (
+                                       <div
+                                          className={cls(size, {
+                                             [active]:
+                                                sizeSelected === ItemSize.name,
+                                          })}
+                                          key={index}
+                                          onClick={() =>
+                                             handleSelectedSize(ItemSize.name)
+                                          }
+                                       >
+                                          {ItemSize.name}
+                                       </div>
+                                    );
+                                 })}
+                              </div>
+                              {sizeSelected && (
+                                 <p
+                                    className={clear}
+                                    onClick={handleClearSizeSelected}
+                                 >
+                                    Clear
+                                 </p>
+                              )}
+
+                              <div className={functionInfo}>
+                                 <div className={increasementAmount}>
+                                    <div
+                                       onClick={() =>
+                                          handleSetQuantity(DECREASEMENT)
+                                       }
+                                    >
+                                       -
+                                    </div>
+                                    <div>{quantity}</div>
+                                    <div
+                                       onClick={() =>
+                                          handleSetQuantity(INCREASEMENT)
+                                       }
+                                    >
+                                       +
+                                    </div>
+                                 </div>
+
+                                 <div className={boxBtn}>
+                                    <Button
+                                       content={
+                                          isLoadingBtn ? (
+                                             <LoadingTextCommon />
+                                          ) : (
+                                             'ADD TO CART'
+                                          )
+                                       }
+                                       customClassName={
+                                          !sizeSelected && activeDisabledBtn
+                                       }
+                                       onClick={handleAdd}
+                                    />
+                                 </div>
+                              </div>
+                              <div className={orSection}>
+                                 <div></div>
+                                 <span>OR</span>
+                                 <div></div>
+                              </div>
+                              <div>
+                                 <Button
+                                    content={'BUY NOW'}
+                                    customClassName={
+                                       !sizeSelected && activeDisabledBtn
+                                    }
+                                 />
+                              </div>
+                              <div className={addFunction}>
+                                 <div>
+                                    <img src={heartIcon} alt="" />
+                                 </div>
+                                 <div>
+                                    <img src={realoadIcon} alt="" />
+                                 </div>
+                              </div>
+                              <div>
+                                 <PaymentMethods />
+                              </div>
+                              <div className={info}>
+                                 <div>
+                                    Brand: <span>Brand 01</span>
+                                 </div>
+                                 <div>
+                                    SKU: <span> 01</span>
+                                 </div>
+                                 <div>
+                                    Category: <span>Men</span>
+                                 </div>
+                              </div>
+                              {dataAccordionMenu.map((item, index) => (
+                                 <AccordionMenu
+                                    titleMenu={item.titleMenu}
+                                    contentJsx={item.content}
+                                    key={index}
+                                    onClick={() => {
+                                       handleSetMenuSelected(item.id);
+                                    }}
+                                    isSelected={menuSelected === item.id}
+                                 />
+                              ))}
                            </div>
                         </div>
-                        <div>
-                           <PaymentMethods />
-                        </div>
-                        <div className={info}>
-                           <div>
-                              Brand: <span>Brand 01</span>
-                           </div>
-                           <div>
-                              SKU: <span> 01</span>
-                           </div>
-                           <div>
-                              Category: <span>Men</span>
-                           </div>
-                        </div>
-                        {dataAccordionMenu.map((item, index) => (
-                           <AccordionMenu
-                              titleMenu={item.titleMenu}
-                              contentJsx={item.content}
-                              key={index}
-                              onClick={() => {
-                                 handleSetMenuSelected(item.id);
-                              }}
-                              isSelected={menuSelected === item.id}
-                           />
-                        ))}
-                     </div>
-                  </div>
+                     )}
+                  </>
                )}
 
-               <div>
-                  <h2>RELATED PRODUCTS</h2>
+               {relatedData.length ? (
+                  <div>
+                     <h2>RELATED PRODUCTS</h2>
 
-                  <SliderComon
-                     data={relatedData}
-                     isProductItem
-                     showItem={4}
-                     showDots={false}
-                  />
-               </div>
+                     <SliderComon
+                        data={relatedData}
+                        isProductItem
+                        showItem={4}
+                        showDots={false}
+                     />
+                  </div>
+               ) : (
+                  <></>
+               )}
             </MainLayout>
          </div>
 

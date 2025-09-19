@@ -25,7 +25,10 @@ function MyFooter() {
             >
                Guaranteed safe checkout
             </p>
-            <img src="https://rg.com.vn/sHzaF" alt="" />
+            <img
+               src="https://xstore.b-cdn.net/elementor2/marseille04/wp-content/uploads/sites/2/elementor/thumbs/Icons-123-pzks3go5g30b2zz95xno9hgdw0h3o8xu97fbaqhtb6.png"
+               alt=""
+            />
          </div>
 
          <div style={{ textAlign: 'center', marginTop: '20px' }}>

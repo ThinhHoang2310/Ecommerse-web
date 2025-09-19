@@ -294,6 +294,18 @@
    }
 }
 
+.emtyData {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 913px;
+
+   p {
+      font-size: 2rem;
+   }
+}
+
 .loading {
    height: 913px;
 

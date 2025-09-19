@@ -19,6 +19,8 @@ function Contents() {
       boxEmtyCart,
       titleEmpty,
       boxBtnEmpty,
+      couponCode,
+      highlight,
    } = styles;
 
    const {
@@ -75,36 +77,51 @@ function Contents() {
    return (
       <>
          {listProductCart.length > 0 && userId ? (
-            <div className={containerContent}>
-               <div style={{ width: '55%' }}>
-                  <CartTable
-                     listProductCart={listProductCart}
-                     getData={handleReplaceQuantity}
-                     isLoading={isLoading}
-                     getDataDelete={handleDeleteItemCart}
-                  />
+            <div>
+               <div className={containerContent}>
+                  <div style={{ width: '55%' }}>
+                     <CartTable
+                        listProductCart={listProductCart}
+                        getData={handleReplaceQuantity}
+                        isLoading={isLoading}
+                        getDataDelete={handleDeleteItemCart}
+                     />
 
-                  <div className={boxFooter}>
-                     <div className={boxCoupon}>
-                        <input type="text" placeholder="Coupon code" />
-                        <Button content={'OK'} />
-                     </div>
-                     <div className={boxBtnDelete}>
-                        <Button
-                           content={
-                              <div style={{ display: 'flex', gap: '5px', alignItems: 'center', justifyContent: 'center' }}>
-                                 <BsTrash3 size={16} />
-                                 CLEAR SHOPPING CART
-                              </div>
-                           }
-                           isPrimary={false}
-                           onClick={handleDeleteCart}
-                        />
+                     <div className={boxFooter}>
+                        <div className={boxCoupon}>
+                           <input type="text" placeholder="Coupon code" />
+                           <Button content={'OK'} />
+                        </div>
+                        <div className={boxBtnDelete}>
+                           <Button
+                              content={
+                                 <div
+                                    style={{
+                                       display: 'flex',
+                                       gap: '5px',
+                                       alignItems: 'center',
+                                       justifyContent: 'center',
+                                    }}
+                                 >
+                                    <BsTrash3 size={16} />
+                                    CLEAR SHOPPING CART
+                                 </div>
+                              }
+                              isPrimary={false}
+                              onClick={handleDeleteCart}
+                           />
+                        </div>
                      </div>
                   </div>
+                  <div style={{ width: '40%' }}>
+                     <CartSummary />
+                  </div>
                </div>
-               <div style={{ width: '40%' }}>
-                  <CartSummary />
+               <div className={containerContent}>
+                  <div className={couponCode}>
+                     Enter code: <span className={highlight}>WILL_TSTORE</span>{' '}
+                     to get 10% off your total bill
+                  </div>
                </div>
             </div>
          ) : (
