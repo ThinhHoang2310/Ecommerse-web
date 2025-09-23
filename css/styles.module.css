@@ -1,12 +1,11 @@
+.wrapLayout {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
-  padding: 30px 20px 0 20px;
-}
-.container .title {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-.container .boxRememberMe {
+  width: 1250px;
+}/*# sourceMappingURL=styles.module.css.map */ner .boxRememberMe {
   margin-bottom: 30px;
 }
 .container .boxRememberMe input {

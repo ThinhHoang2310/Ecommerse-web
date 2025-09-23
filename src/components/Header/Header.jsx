@@ -35,15 +35,32 @@ function MyHeader() {
    const { scrollPosition } = useScrollHandling();
    const [fixedPosition, setFixedPosition] = useState(false);
 
-   const { setIsOpen, setType, userId, listProductCart } =
-      useContext(SideBarContext);
+   const {
+      setIsOpen,
+      setType,
+      userId,
+      listProductCart,
+      handleGetListProductCart,
+   } = useContext(SideBarContext);
 
    const { userInfo } = useContext(StoreContext);
+   console.log('userInfo', userInfo);
 
    const handleOpenSideBar = type => {
       setIsOpen(true);
       setType(type);
    };
+
+   const handleOpenCartSideBar = () => {
+      handleGetListProductCart(userId, 'cart');
+      handleOpenSideBar('cart');
+   };
+
+   const totalItemCart = listProductCart.length
+      ? listProductCart.reduce((acc, item) => {
+           return acc + item.quantity;
+        }, 0)
+      : 0;
 
    useEffect(() => {
       //Cách 1: If Else
@@ -127,9 +144,11 @@ function MyHeader() {
                         height={22}
                         src={cartIcon}
                         alt="cartIcon"
-                        onClick={() => handleOpenSideBar('cart')}
+                        onClick={() => handleOpenCartSideBar()}
                      />
-                     <div className={quantity}>{listProductCart.length}</div>
+                     <div className={quantity}>
+                        {totalItemCart || userInfo?.amountCart || 0}
+                     </div>
                   </div>
 
                   {/* <TfiReload style={{ fontSize: '20px' }} onClick={() => handleOpenSideBar('compare')}  />

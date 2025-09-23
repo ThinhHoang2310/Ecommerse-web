@@ -5,6 +5,7 @@ import Steps from '@/pages/Cart/components/steps/Steps';
 
 import styles from './styles.module.scss';
 import MainLayout from '@components/Layout/Layout';
+import { use } from 'react';
 
 function Cart() {
    const { container } = styles;

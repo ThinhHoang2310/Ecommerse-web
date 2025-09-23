@@ -54,7 +54,10 @@ function Cart() {
          />
          {listProductCart.length ? (
             <div className={containerListItem}>
-               <div>
+               <div
+                  style={{ height: 'calc(100vh - 240px)', overflow: 'auto' }}
+                  className={containerListProductCart}
+               >
                   {isLoading ? (
                      <LoadingTextCommon />
                   ) : (
@@ -84,8 +87,8 @@ function Cart() {
 
                   <div className={boxBtn}>
                      <Button
-                        onClick={handleNavigateCart}
                         content={'VIEW CART'}
+                        onClick={handleNavigateCart}
                      />
                      <Button content={'CHECKOUT'} isPrimary={false} />
                   </div>
