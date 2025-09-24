@@ -10,7 +10,7 @@ import ListProducts from '@pages/OurShop/components/ListProducts';
 import MyFooter from '@components/Footer/Footer';
 
 function OurShop() {
-   const { container, fucntionBox, specialText, btnBack } = styles;
+   const { container, functionBox, specialText, btnBack } = styles;
 
    const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ function OurShop() {
          <MyHeader />
          <MainLayout>
             <div className={container}>
-               <div className={fucntionBox}>
+               <div className={functionBox}>
                   <div>
                      Home &gt; <span className={specialText}>Our Shop</span>
                   </div>

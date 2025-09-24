@@ -9,7 +9,7 @@ const routers = [
       path: '/blog',
       component: lazy(() => import('@components/Blog/Blog')),
    },
-    {
+   {
       path: '/shop',
       component: lazy(() => import('@pages/OurShop/OurShop')),
    },
@@ -17,9 +17,13 @@ const routers = [
       path: '/cart',
       component: lazy(() => import('@pages/Cart/Cart')),
    },
-    {
+   {
       path: '/product/:id',
       component: lazy(() => import('@pages/DetailProduct')),
+   },
+   {
+      path: '/about-us',
+      component: lazy(() => import('@pages/AboutUs')),
    },
 ];
 

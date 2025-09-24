@@ -5,7 +5,7 @@
    // padding: 30px 20px 0 20px;
    padding-top: 83px;
 
-   .fucntionBox {
+   .functionBox {
       @include flex_box_custom(space-between, center, 0px);
       color: $secondary_color;
       font-size: 14px;
