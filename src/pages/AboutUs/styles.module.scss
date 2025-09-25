@@ -113,98 +113,33 @@
       }
    }
 
-   // .faqList {
-   //    margin-top: 30px;
-   // }
-
-   // .faqItem {
-   //    border-bottom: 1px solid #e0e0e0;
-   //    padding: 15px 0;
-   // }
-
-   // .faqQuestion {
-   //    display: flex;
-   //    justify-content: space-between;
-   //    font-size: 16px;
-   //    cursor: pointer;
-   // }
-
-   // .faqIcon {
-   //    font-size: 20px;
-   //    transition: transform 0.3s ease;
-   // }
-
-   // .faqIcon.open {
-   //    transform: rotate(180deg);
-   // }
-
-   // .faqAnswer {
-   //    margin-top: 10px;
-   //    color: #555;
-   //    font-size: 14px;
-   //    line-height: 1.6;
-
-   //    max-height: 0;
-   //    overflow: hidden;
-
-   //    opacity: 0;
-   //    padding: 0;
-
-   //    transition: max-height 0.4s ease;
-   // }
-
-   // .faqAnswer.open {
-   //    max-height: 1000px; // số này đặt lớn để chứa được nội dung dài nhất
-   //    opacity: 1;
-   //    padding: 10px 0;
-   // }
-
-   .faqList {
-      margin-top: 3rem;
-   }
-
-   .faqItem {
-      margin-bottom: 1rem;
-      overflow: hidden;
-   }
-
-   .faqQuestion {
-      cursor: pointer;
-      padding: 1.5rem;
-      background: white;
+   .containerFaqContent {
+      margin-top: 50px !important;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: none;
-      outline: none;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-         background-color: #f8f9fa;
-      }
-
-      span:first-child {
-         font-weight: 500;
-         color: #333;
-         flex: 1;
-         text-align: left;
-      }
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      width: 100%;
    }
 
-   .faqIcon {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #070707;
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      text-align: center;
-      line-height: 20px;
+   .customContainer {
+      width: 100%;
    }
 
-   .faqAnswer {
+   .customTitle {
+      width: 100%;
+      font-size: 1.8rem !important;
+      padding: 20px 15px !important;
+      color: #333 !important;
+      cursor: pointer !important;
+   }
+
+   .customContent {
+      width: 100%;
+      padding: 25px;
+      padding-left: 35px;
+      font-size: 1.5rem !important;
+      line-height: 1.8;
       color: #555;
-      line-height: 1.6;
-      font-size: 14px;
    }
 }

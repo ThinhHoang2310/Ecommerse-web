@@ -4,7 +4,15 @@ import cls from 'classnames';
 import { FaAngleDown } from 'react-icons/fa6';
 import { GoHorizontalRule } from 'react-icons/go';
 
-function AccordionMenu({ titleMenu, contentJsx, onClick, isSelected }) {
+function AccordionMenu({
+   titleMenu,
+   contentJsx,
+   onClick,
+   isSelected,
+   containerClass = '',
+   titleClass = '',
+   contentClass = '',
+}) {
    const {
       container,
       title,
@@ -19,9 +27,9 @@ function AccordionMenu({ titleMenu, contentJsx, onClick, isSelected }) {
    };
 
    return (
-      <div className={container}>
+      <div className={cls(container, containerClass)}>
          <div
-            className={cls(title, {
+            className={cls(title, titleClass, {
                [activeTitle]: isSelected,
             })}
             onClick={handleToggle}
@@ -35,7 +43,7 @@ function AccordionMenu({ titleMenu, contentJsx, onClick, isSelected }) {
          </div>
 
          <div
-            className={cls(contentMenu, borderBottom, {
+            className={cls(contentMenu, borderBottom, contentClass, {
                [isvisibility]: isSelected,
             })}
          >

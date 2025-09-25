@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -90,9 +90,14 @@ function Logos() {
          <Swiper
             spaceBetween={50}
             slidesPerView={5}
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
             navigation={true}
             loop={true}
+            autoplay={{
+               delay: 0, // không delay
+               disableOnInteraction: false,
+            }}
+            speed={2000} // càng lớn thì chạy càng chậm
          >
             {dataLogos.map(item => (
                <SwiperSlide

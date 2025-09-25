@@ -6,6 +6,7 @@ import { useState } from 'react';
 import styles from './styles.module.scss';
 
 import Logos from '@/pages/AboutUs/components/Logos';
+import AccordionMenu from '@components/AccordionMenu';
 
 function AboutUs() {
    const {
@@ -21,12 +22,14 @@ function AboutUs() {
       containerContent,
       des,
       containerFaq,
-      faqList,
-      faqItem,
-      faqQuestion,
-      faqAnswer,
-      faqIcon,
+      containerFaqContent,
    } = styles;
+
+   // const [menuSelected, setMenuSelected] = useState(1);
+
+   // const handleSetMenuSelected = id => {
+   //    setMenuSelected(id);
+   // };
 
    const dataContent = [
       {
@@ -46,7 +49,7 @@ function AboutUs() {
       },
    ];
 
-   const faqData = [
+   const dataFaq = [
       {
          id: 1,
          q: 'Feugiat purus mi nisl dolor pellentesque tellus?',
@@ -137,50 +140,19 @@ function AboutUs() {
                   </div>
                </div>
 
-               <div className={faqList}>
-                  {faqData.map(item => {
-                     const isOpen = openId.includes(item.id);
-
-                     return (
-                        <div key={item.id} className={faqItem}>
-                           <div
-                              className={faqQuestion}
-                              onClick={() => toggleFAQ(item.id)}
-                           >
-                              <span>{item.q}</span>
-                              <span
-                                 className={faqIcon}
-                                 style={{
-                                    transform: isOpen
-                                       ? 'rotate(45deg)'
-                                       : 'rotate(0deg)',
-                                    transition: 'transform 0.3s ease',
-                                 }}
-                              >
-                                 {isOpen ? '−' : '+'}
-                              </span>
-                           </div>
-
-                           <div
-                              className={faqAnswer}
-                              style={{
-                                 maxHeight: isOpen ? '200px' : '0px',
-                                 opacity: isOpen ? 1 : 0,
-                                 padding: isOpen ? '20px' : '0 20px',
-                                 overflow: 'hidden',
-                                 transition:
-                                    'max-height 0.4s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out',
-                                 backgroundColor: '#f8f9fa',
-                                 borderTop: isOpen
-                                    ? '1px solid #e9ecef'
-                                    : 'none',
-                              }}
-                           >
-                              {item.a}
-                           </div>
-                        </div>
-                     );
-                  })}
+               <div className={containerFaqContent}>
+                  {dataFaq.map((item, index) => (
+                     <AccordionMenu
+                        titleMenu={item.q}
+                        contentJsx={item.a}
+                        key={index}
+                        isSelected={openId.includes(item.id)}
+                        onClick={() => toggleFAQ(item.id)}
+                        containerClass={styles.customContainer}
+                        titleClass={styles.customTitle}
+                        contentClass={styles.customContent}
+                     />
+                  ))}
                </div>
             </div>
          </MainLayout>
