@@ -28,12 +28,17 @@ function App() {
                      </Routes>
                   </Suspense>
 
-                         {/* Thêm chatbot luôn hiển thị */}
-                  {/* <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 999 }}>
+                  {/* Thêm chatbot luôn hiển thị */}
+                  <div
+                     style={{
+                        position: 'fixed',
+                        bottom: '20px',
+                        right: '20px',
+                        zIndex: 999,
+                     }}
+                  >
                      <Chatbot />
-                  </div> */}
-
-
+                  </div>
                </BrowserRouter>
             </SideBarProvider>
          </ToastProvider>

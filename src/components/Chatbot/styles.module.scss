@@ -6,60 +6,76 @@
 }
 
 .chatbotIcon {
-   width: 60px;
-   height: 60px;
+   width: 70px;
+   height: 70px;
    border-radius: 50%;
-   background-color: #007bff;
    display: flex;
    align-items: center;
    justify-content: center;
-   color: #fff;
    cursor: pointer;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-   font-size: 28px;
-   position: relative;
-   z-index: 10;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   animation: smoothScale 3s infinite ease-in-out;
+   transition: transform 0.3s ease;
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+   }
+}
+
+@keyframes smoothScale {
+   0%,
+   100% {
+      transform: scale(1);
+   }
+   50% {
+      transform: scale(1.15);
+   }
 }
 
 .chatbotBox {
-   width: 350px;
-   height: 400px;
-   background-color: #fff;
-   border-radius: 10px;
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   width: 360px;
+   max-height: 500px;
+   background: #fff;
+   border-radius: 12px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
    display: flex;
    flex-direction: column;
    overflow: hidden;
+   height: 500px;
    opacity: 0;
    pointer-events: none;
-
    position: absolute;
    bottom: 0;
    right: 0;
-   transform: translateX(100%); /* ẩn hoàn toàn sang phải */
+   transform: translateX(100%);
    transition: all 0.3s ease;
 
    &.open {
       opacity: 1;
-      transform: translateX(0); /* trượt vào vị trí */
+      transform: translateX(0);
       pointer-events: auto;
    }
 }
 
 .chatbotHeader {
-   background-color: #007bff;
+   background: #007bff;
    color: #fff;
-   padding: 10px;
+   padding: 12px;
+   font-weight: bold;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   font-size: 1.2rem;
 
    button {
       background: transparent;
       border: none;
       color: #fff;
+      font-size: 18px;
       cursor: pointer;
-      font-size: 16px;
    }
 }
 
@@ -67,31 +83,77 @@
    flex: 1;
    padding: 10px;
    overflow-y: auto;
-   background-color: #f5f5f5;
-   scroll-behavior: smooth;
+   background: #f8f9fa;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
 
    .chatbotMessage {
-      margin-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.4rem;
 
       &.user {
-         text-align: right;
-
+         align-items: flex-end;
          span {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            background-color: #dcf8c6;
+            background: #dcf8c6;
+            padding: 8px 12px;
+            border-radius: 20px 20px 0 20px;
+            max-width: 80%;
+            word-break: break-word;
          }
       }
 
       &.bot {
-         text-align: left;
+         align-items: flex-start;
 
          span {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            background-color: #f1f0f0;
+            background: #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 20px 20px 20px 0;
+            max-width: 80%;
+            word-break: break-word;
+         }
+
+         .botMessageCard {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .productCard {
+               display: flex;
+               flex-direction: column;
+               border-bottom: 1px solid #eee;
+               padding: 8px 0;
+
+               &:last-child {
+                  border-bottom: none;
+               }
+
+               img {
+                  width: 100%;
+                  height: 120px;
+                  object-fit: cover;
+                  border-radius: 6px;
+                  margin-bottom: 5px;
+               }
+
+               strong {
+                  font-size: 1rem;
+                  color: #007bff;
+                  margin-bottom: 2px;
+               }
+
+               p {
+                  font-size: 0.85rem;
+                  margin: 2px 0;
+                  color: #333;
+               }
+            }
          }
       }
    }
@@ -106,6 +168,7 @@
       padding: 10px;
       border: none;
       outline: none;
+      font-size: 1.6rem;
    }
 
    button {
@@ -114,5 +177,21 @@
       background-color: #007bff;
       color: #fff;
       cursor: pointer;
+      transition: background 0.2s ease;
+
+      &:hover {
+         background-color: #0056b3;
+      }
+   }
+
+   @keyframes fadeIn {
+      from {
+         opacity: 0;
+         transform: translateY(10px);
+      }
+      to {
+         opacity: 1;
+         transform: translateY(0);
+      }
    }
 }

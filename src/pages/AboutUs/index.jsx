@@ -52,33 +52,33 @@ function AboutUs() {
    const dataFaq = [
       {
          id: 1,
-         q: 'Feugiat purus mi nisl dolor pellentesque tellus?',
-         a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+         q: 'What is the purpose of this service?',
+         a: 'This service is designed to provide you with seamless solutions tailored to your needs.',
       },
       {
          id: 2,
-         q: 'Suspendisse nunc sagittis adipiscing imperdiet turpis sodales massa convallis sit?',
-         a: 'Aliquam erat volutpat. Donec at orci vitae nunc malesuada.',
+         q: 'How can I get started quickly?',
+         a: 'Getting started is easy! Simply follow the step-by-step instructions to set up your account.',
       },
       {
          id: 3,
-         q: 'Facilisis adipiscing lacus, nisl at in consectetur in?',
-         a: 'Ut sit amet justo at sapien gravida aliquet.',
+         q: 'Is my information kept secure?',
+         a: 'Absolutely! We take data privacy seriously and implement top-notch security measures.',
       },
       {
          id: 4,
-         q: 'Pellentesque egestas eget amet erat leo arcu?',
-         a: 'Cras viverra ligula sit amet augue varius tristique.',
+         q: 'Can I customize the features according to my needs?',
+         a: 'Yes, our platform offers flexible options that allow you to customize features effortlessly.',
       },
       {
          id: 5,
-         q: 'Pellentesque pulvinar nibh suspendisse faucibus libero condimentum phasellus.',
-         a: 'Etiam tincidunt leo sed sapien pulvinar, sed aliquam ligula bibendum.',
+         q: 'What support options are available?',
+         a: 'We provide 24/7 customer support to help you with any questions or issues that may arise.',
       },
       {
          id: 6,
-         q: 'Hendrerit commodo id mattis consequat.',
-         a: 'Integer ultricies metus sit amet sem sollicitudin, non pretium risus finibus.',
+         q: 'How do I track my progress or usage?',
+         a: 'You can easily monitor your activities and progress through your personalized dashboard.',
       },
    ];
 
