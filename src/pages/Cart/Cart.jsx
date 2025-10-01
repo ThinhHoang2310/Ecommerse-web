@@ -1,26 +1,26 @@
+import Steps from '@/pages/Cart/components/steps/Steps';
 import MyFooter from '@components/Footer/Footer';
 import MyHeader from '@components/Header/Header';
-import Contents from '@/pages/Cart/components/contents/Contents';
-import Steps from '@/pages/Cart/components/steps/Steps';
 
-import styles from './styles.module.scss';
+import { StepperProvider } from '@/contexts/StepperProvider';
+import ContentStep from '@/pages/Cart/components/ContentStep';
 import MainLayout from '@components/Layout/Layout';
-import { use } from 'react';
+import styles from './styles.module.scss';
 
 function Cart() {
    const { container } = styles;
 
    return (
-      <>
+      <StepperProvider>
          <MyHeader />
          <div className={container}>
             <Steps />
             <MainLayout>
-               <Contents />
+               <ContentStep />
             </MainLayout>
          </div>
          <MyFooter />
-      </>
+      </StepperProvider>
    );
 }
 

@@ -44,7 +44,7 @@ function MyHeader() {
    } = useContext(SideBarContext);
 
    const { userInfo } = useContext(StoreContext);
-   console.log('userInfo', userInfo);
+   // console.log('userInfo', userInfo);
 
    const handleOpenSideBar = type => {
       setIsOpen(true);
