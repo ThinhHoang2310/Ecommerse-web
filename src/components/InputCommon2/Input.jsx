@@ -1,16 +1,28 @@
 import styles from './styles.module.scss';
 
-function InputCustom({ label, type, dataOption, isRequired = false }) {
+function InputCustom({
+   label,
+   type,
+   dataOptions,
+   isRequired = false,
+   register,
+   isShowLabel = true,
+}) {
    const { container, labelCls } = styles;
 
    const renderInput = () => {
       if (type === 'text') {
-         return <input type="text" placeholder={label} />;
+         return <input type="text" placeholder={label} {...register} />;
       } else {
          return (
-            <select>
-               {dataOption.map(item => (
-                  <option key={item.value}>{item.label}</option>
+            <select {...register} >
+               <option value="" selected disabled hidden>
+                  {label}
+               </option>
+               {dataOptions.map(item => (
+                  <option key={item.value} value={item.value}>
+                     {item.label}
+                  </option>
                ))}
             </select>
          );
@@ -19,9 +31,12 @@ function InputCustom({ label, type, dataOption, isRequired = false }) {
 
    return (
       <div className={container}>
-         <label className={labelCls}>
-            {label} {isRequired && <span>*</span>}
-         </label>
+         {isShowLabel && (
+            <label className={labelCls}>
+               {label} {isRequired && <span>*</span>}
+            </label>
+         )}
+
          {renderInput()}
       </div>
    );

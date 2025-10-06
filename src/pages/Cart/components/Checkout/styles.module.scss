@@ -1,0 +1,42 @@
+@import '@styles/mixin.module.scss';
+@import '@styles/variable.module.scss';
+
+.container {
+   display: flex;
+   gap: 20px;
+
+   .leftBody {
+      flex-grow: 1;
+
+      .coupon {
+         font-size: 1.2rem;
+         color: #222;
+
+         span {
+            text-decoration: underline;
+            cursor: pointer;
+         }
+      }
+
+      .title {
+         font-size: 1.6rem;
+         color: #333;
+      }
+
+      .row {
+         margin-bottom: 20px;
+      }
+
+      .row2Column {
+         display: flex;
+         gap: 20px;
+      }
+   }
+
+   .rightBody {
+      max-width: 500px;
+      width: 100%;
+      background-color: black;
+      height: 500px;
+   }
+}
