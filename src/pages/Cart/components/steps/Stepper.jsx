@@ -7,7 +7,7 @@ function Stepper({ number, content, isDisabled }) {
    const { stepper, numberStep, textStep, isDisabledNumber, isDisabledText } =
       styles;
 
-   const {setCurrentStep} = useContext(StepperContext);
+   const { setCurrentStep } = useContext(StepperContext);
 
    return (
       <div

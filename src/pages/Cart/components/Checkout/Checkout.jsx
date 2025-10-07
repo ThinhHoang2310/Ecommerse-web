@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import cls from 'classnames';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import RightBody from '@/pages/Cart/components/Checkout/RightBody';
 
 const CN_BASE = 'https://countriesnow.space/api/v0.1';
 
@@ -217,12 +218,10 @@ function Checkout() {
                      })}
                   />
                </div>
-
-               <button type="submit">Submit</button>
             </form>
          </div>
 
-         <div className={rightBody}></div>
+         <RightBody />
       </div>
    );
 }

@@ -1,4 +1,5 @@
 import { addProductToCart } from '@/apis/cartService';
+import { list } from 'postcss';
 
 export const handleAddProductToCartCommon = (
    userId,
@@ -44,4 +45,26 @@ export const handleAddProductToCartCommon = (
          toast.error('Add product to cart failed!');
          setIsLoading(false);
       });
+};
+
+// export const handleTotalPrice = listProduct => {
+//    return listProduct.reduce((acc, item) => {
+//       return acc + item.total;
+//    });
+// };
+
+export const handleTotalPrice = (listProduct = []) => {
+   // Nếu mảng trống, trả về 0
+   if (!Array.isArray(listProduct) || listProduct.length === 0) return 0;
+
+   // Tính tổng, ép kiểu giá trị thành số
+   const total = listProduct.reduce((acc, item) => {
+      const itemTotal =
+         typeof item.total === 'number'
+            ? item.total
+            : parseFloat(item.total) || 0;
+      return acc + itemTotal;
+   }, 0);
+
+   return total;
 };
