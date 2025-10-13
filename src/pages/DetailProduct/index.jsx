@@ -80,6 +80,10 @@ function DetailProduct() {
 
    const [isLoadingBtnBuyNow, setIsLoadingBtnBuyNow] = useState(false);
 
+   const handleNavigateToShop = () => {
+      navigate('/shop');
+   };
+
    const dataAccordionMenu = [
       {
          id: 1,
@@ -206,7 +210,11 @@ function DetailProduct() {
             <MainLayout>
                <div className={navigateSection}>
                   <div>Home {'>'} Men</div>
-                  <div className="" style={{ cursor: 'pointer' }}>
+                  <div
+                     className=""
+                     style={{ cursor: 'pointer' }}
+                     onClick={() => navigate('/shop')}
+                  >
                      {'<'} Return to previous page
                   </div>
                </div>

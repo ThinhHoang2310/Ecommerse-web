@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 
 import styles from './styles.module.scss';
 import cls from 'classnames';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import RightBody from '@/pages/Cart/components/Checkout/RightBody';
+import { createOrder } from '@/apis/orderService';
+import { useNavigate } from 'react-router-dom';
+import { StepperContext } from '@/contexts/StepperProvider';
 
 const CN_BASE = 'https://countriesnow.space/api/v0.1';
 
 function Checkout() {
-   const { container, leftBody, rightBody, row, row2Column, title, coupon } =
-      styles;
+   const { container, leftBody, row, row2Column, title, coupon } = styles;
 
    const dataOptions = [
       { value: '1', label: 'Option 1' },
@@ -23,6 +25,10 @@ function Checkout() {
    const [cities, setCities] = useState([]);
    const [states, setStates] = useState([]);
 
+   const navigate = useNavigate();
+
+   const {setCurrentStep} = useContext(StepperContext)
+
    const {
       register,
       handleSubmit,
@@ -30,7 +36,24 @@ function Checkout() {
       formState: { errors },
    } = useForm();
 
-   console.log(errors);
+   const formRef = useRef();
+
+   const handleExternalSubmit = () => {
+      formRef.current.requestSubmit();
+   };
+
+   const onSubmit = async data => {
+      try {
+         const res = await createOrder(data);
+         setCurrentStep(3);
+
+         navigate(
+            `/cart?id=${res.data.data._id}&totalAmount=${res.data.data.totalAmount}`
+         );
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    useEffect(() => {
       axios.get(`${CN_BASE}/countries/iso`).then(res =>
@@ -90,8 +113,6 @@ function Checkout() {
       }
    }, [watch('cities')]);
 
-   console.log(cities);
-
    return (
       <div className={container}>
          <div className={leftBody}>
@@ -101,7 +122,7 @@ function Checkout() {
 
             <p className={title}>BILLING DETAILS</p>
 
-            <form onSubmit={handleSubmit(data => console.log(data))}>
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                <div className={cls(row, row2Column)}>
                   <InputCustom
                      label={'First Name'}
@@ -111,6 +132,7 @@ function Checkout() {
                         required: true,
                         maxLength: 25,
                      })}
+                     isError={errors.firstName}
                   />
 
                   <InputCustom
@@ -121,6 +143,7 @@ function Checkout() {
                         required: true,
                         maxLength: 25,
                      })}
+                     isError={errors.lastName}
                   />
                </div>
 
@@ -152,6 +175,7 @@ function Checkout() {
                      register={register('street', {
                         required: true,
                      })}
+                     isError={errors.street}
                   />
                </div>
 
@@ -172,6 +196,7 @@ function Checkout() {
                      register={register('cities', {
                         required: true,
                      })}
+                     isError={errors.cities}
                   />
                </div>
 
@@ -183,6 +208,7 @@ function Checkout() {
                      register={register('state', {
                         required: true,
                      })}
+                     isError={errors.state}
                   />
                </div>
 
@@ -194,6 +220,7 @@ function Checkout() {
                      register={register('phone', {
                         required: true,
                      })}
+                     isError={errors.phone}
                   />
                </div>
 
@@ -205,6 +232,7 @@ function Checkout() {
                      register={register('zipCode', {
                         required: true,
                      })}
+                     isError={errors.zipCode}
                   />
                </div>
 
@@ -216,12 +244,13 @@ function Checkout() {
                      register={register('email', {
                         required: true,
                      })}
+                     isError={errors.email}
                   />
                </div>
             </form>
          </div>
 
-         <RightBody />
+         <RightBody handleExternalSubmit={handleExternalSubmit} />
       </div>
    );
 }

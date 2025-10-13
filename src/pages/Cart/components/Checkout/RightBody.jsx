@@ -5,7 +5,7 @@ import { SideBarContext } from '@/contexts/SideBarProvider';
 import Button from '@components/Button/Button';
 import { handleTotalPrice } from '@/ultis/helper';
 
-function RightBody() {
+function RightBody({ handleExternalSubmit }) {
    const {
       rightBody,
       title,
@@ -15,7 +15,7 @@ function RightBody() {
       Total,
       payment,
       paymentCod,
-      btn
+      btn,
    } = styles;
 
    const { listProductCart } = useContext(SideBarContext);
@@ -59,7 +59,7 @@ function RightBody() {
          </div>
 
          <div className={btn}>
-            <Button content={'PLACE ORDER'} />
+            <Button content={'PLACE ORDER'} onClick={handleExternalSubmit} />
          </div>
 
          <PaymentMethods />
