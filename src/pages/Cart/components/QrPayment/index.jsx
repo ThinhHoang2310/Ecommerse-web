@@ -4,19 +4,56 @@ import styles from './styles.module.scss';
 
 import cls from 'classnames';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
 function QrPayment() {
-   const { container, left, right, flex, title, des ,total} = styles;
+   const { container, left, right, flex, title, des, total } = styles;
 
    const location = useLocation();
 
    const params = new URLSearchParams(location.search);
+
+   const [isSuccess, setIsSuccess] = useState(false);
 
    const id = params.get('id');
 
    const totalAmount = params.get('totalAmount');
 
    const qrCodeImage = `https://qr.sepay.vn/img?acc=10002148075&bank=TPBank&amount=${totalAmount}&des=${id}`;
+
+   let interval;
+
+   const handleGetDetailOrder = async () => {
+      if (!id) return;
+
+      try {
+         const res = await getDetailOrder(id);
+
+         if (res.data.data.status !== 'pending') {
+            clearInterval(interval);
+         }
+
+         if (res.data.data.status === 'success') {
+            setIsSuccess(true);
+         } else {
+            setIsSuccess(false);
+         }
+
+         console.log(res);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   useEffect(() => {
+      interval = setInterval(() => {
+         handleGetDetailOrder();
+      }, 5000);
+
+      return () => {
+         clearInterval(interval);
+      };
+   }, []);
 
    return (
       <div className={container}>
@@ -27,7 +64,7 @@ function QrPayment() {
          </div>
 
          <div>
-            <h3>Payment details</h3>
+            <h4>Payment details</h4>
             <div className={right}>
                <div className={cls(flex, title)}>
                   <img

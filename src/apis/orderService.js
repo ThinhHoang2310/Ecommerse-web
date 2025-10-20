@@ -8,4 +8,6 @@ const getDetailOrder = async id => {
    return await axiosClient.post('/orders/${id}', data);
 };
 
+
+
 export { createOrder, getDetailOrder };
